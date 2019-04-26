@@ -2,10 +2,24 @@
   "name": "belch",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.6",
+    "brewerydb-node": "0.0.1",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "google-map-react": "^1.1.4",
+    "massive": "^5.7.7",
+    "query-string": "^6.4.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-redux": "^7.0.2",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.0",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +41,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "server",
+  "devDependencies": {},
+  "keywords": [
+    "belch"
+  ],
+  "author": "Patrick McMahon",
+  "license": "ISC"
 }

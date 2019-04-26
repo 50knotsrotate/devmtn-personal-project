@@ -1,0 +1,62 @@
+.sign-up {
+    background:
+    linear-gradient(rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7)),
+    /* bottom, image */
+    url('../../assets/beer.jpg');
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.form {
+    width: 100%;
+    min-width: 50px;
+    background: rgba(0,0,0,.5);
+    border-radius: 10px;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 10px;
+}
+.sign-up-form h1 {
+  font-size: 4em;
+  color: white;
+  font-family: monospace;
+}
+
+.input-field {
+    /* width: 90%; */
+    min-width: 100px;
+    height: 40px;
+    background: rgba(0,0,0,.1);
+    font-size: 2em;
+    font-family: monospace;
+    margin: 50px;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.sign-up-button {
+    width: 100%;
+    font-size: 2em;
+    font-family: monospace;
+    border-radius: 10px;
+    background-color: green;
+    border: none;
+    color: white;
+}

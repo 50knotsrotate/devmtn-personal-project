@@ -1,0 +1,28 @@
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    background-color: rgba(0,0,0,.5);
+    color: white;
+    font-family: monospace;
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.nav-items a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.nav-items a:hover {
+    border-bottom: 3px solid white;
+
+}
