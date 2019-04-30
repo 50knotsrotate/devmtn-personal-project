@@ -12,6 +12,8 @@ export default class SignUp extends Component {
     this.state = {
       username: "",
       password: "",
+      textNotifications: false,
+      number: null,
       user: null
     };
   }
@@ -28,6 +30,12 @@ export default class SignUp extends Component {
     });
   }
 
+  onNumber = number => { 
+    this.setState({
+      number
+    })
+  }
+
 
   componentDidMount() {
     // console.log('ayy')
@@ -40,6 +48,13 @@ export default class SignUp extends Component {
       })
     })
   };
+
+  toggleText = () => {
+    this.setState({
+      textNotifications: !this.state.textNotifications
+    })
+    console.log(this.state.textNotifications)
+  }
 
   render() {
     const form = (
@@ -62,10 +77,19 @@ export default class SignUp extends Component {
               placeholder="Password"
               className="input-field"
             />
-            <br />
+            <h4>I would like to recive text notifications</h4>
+            <input type="checkbox" onChange={e => this.toggleText(e)} />
+            {this.state.textNotifications && (
+              <input type='text' className='text-number' placeholder='No spaces of dashes. Dont worry, we encrypt these.' onChange={e => this.onNumber(e.target.value)} value={this.state.number} />
+            )}
           </div>
-          <br />
-          <button className="sign-up-button" onClick={() => this.props.submit(this.state.username, this.state.password)}>
+          {/* <br /> */}
+          <button
+            className="sign-up-button"
+            onClick={() =>
+              this.props.submit(this.state.username, this.state.password, this.state.textNotifications, this.state.number)
+            }
+          >
             Sign Up
           </button>
           <h2 onClick={this.props.signIn}>Already have an account?</h2>

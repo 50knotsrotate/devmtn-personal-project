@@ -5,7 +5,7 @@ import "./Modal.css";
 export default function Modal(props) {
   return (
       <div>
-      {props.type ? (
+      {props.type ? ( //props.type because I am sharing this modal with another component
         <div className='map'>
           <h2>{props.name}</h2>
           <h3>{props.distance} miles</h3>

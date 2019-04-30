@@ -12,7 +12,7 @@ export default function NavBar(props) {
           <div className="nav-items">
               <li><a onClick={() => props.backHome(true)} href = '/#'>Home</a></li>
         <Link onClick={() => props.backHome(false)} to = '/notifications'><li><a href = '/#'>My activity</a></li></Link>
-              <li><a href = '/#'>Store</a></li>
+        <Link to = '/store' onClick={() => props.backHome(false)}> <li><a href = '/#'>Store</a></li> </Link>
         <button className = 'logout' onClick={props.logout}>Logout</button>
       </div>
       <img src={hamburgerIcon} className='hamburger-icon' alt='nav dropdown menu' onClick={props.toggleModal}/>

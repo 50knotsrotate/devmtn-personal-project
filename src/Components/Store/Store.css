@@ -1,0 +1,19 @@
+.store {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.items {
+    margin-top: 50px;
+}
+
+.purchase {
+    width: 200px;
+    height: 150px;
+    font-family: monospace;
+    font-weight: bold;
+    background-color: skyblue;
+}

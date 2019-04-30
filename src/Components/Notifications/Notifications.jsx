@@ -17,15 +17,14 @@ export default class Notifications extends Component {
   }
   componentWillMount() {
     Axios.get("/getNotifications").then(res => {
-      Axios.get("/checkSession").then(session => {
+        Axios.get("/checkSession").then(session => {
         this.setState({
           notifications: res.data,
-          notificationsCopy: res.data.filter(notif => notif.is_new == "true"),
-          isPremiumUser: session.data.is_premium_user == "true"
+          notificationsCopy: res.data.filter(notif => notif.is_new === "true"),
+          isPremiumUser: session.data[0].premium_user === "true"
         });
       });
     });
-    console.log(this.state.isPremiumUser);
   }
 
   componentWillUnmount() {

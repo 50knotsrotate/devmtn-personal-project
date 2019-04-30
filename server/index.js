@@ -1,7 +1,10 @@
 require("dotenv").config();
+//controllers
 const authController = require("./Controllers/authController");
 const commentsController = require("./Controllers/commentsController");
 const notificationsController = require('./Controllers/notificationsController')
+const twilioController = require('./Controllers/twilioController');
+const authMiddleware = require('./middleware/authMiddleware')
 const express = require("express");
 const app = express();
 const massive = require("massive");
@@ -11,15 +14,19 @@ const axios = require("axios");
 const stripe = require("stripe")("sk_test_G8dVhSMIYUb4k5T0DO6Fu0Ci00KM5O8VDz");
 
 
+
 const {
   API_KEY,
   PORT,
   CONNECTION_STRING,
   SESSION_SECRET,
   SANDBOX_API,
-  STRIPE_KEY
+  STRIPE_KEY,
+  TWILIO_SID,
+  TWILIO_AUTH_TOKEN
 } = process.env;
 const brewDB = new breweryDB(API_KEY);
+const client = require("twilio")(TWILIO_SID, TWILIO_AUTH_TOKEN);
 
 app.use(express.json());
 
@@ -42,10 +49,15 @@ massive(CONNECTION_STRING)
     console.log("Failed to connect to DB");
   });
 
-app.post("/signup", authController.sign_up);
+app.post("/signup", authMiddleware.checkCredentials, authController.sign_up, twilioController.welcome);
 app.post("/signin", authController.sign_in);
 app.get("/logout", authController.logout);
 app.get("/checksession", authController.checkSession);
+app.get('/store', async function(req, res) { 
+  const db = req.app.get('db')
+  const store = await (db.get_store())
+  res.status(200).send(store)
+})
 
 app.get("/breweryInfo", function(req, res) {
   //res.status(200).send('ayy')
@@ -78,11 +90,6 @@ app.put('/updateUser/', function (req, res) {
   })
 })
 
-// app.get("/ayy", function(req, res) {
-//   brewDB.beer.getById("eGXsfq", {}, function(err, data) {
-//     res.status(200).send(data);
-//   });
-// });
 
 app.put("/updateNotifications", notificationsController.updateNotifications);
 app.get('/getNotifications', notificationsController.getNotifications);
@@ -111,52 +118,14 @@ app.post("/test", (req, res) => {
     })
 });
 
-
-// app.get("/test", function(req, res) {
-//   axios
-//     .get(
-//       'https://api.brewerydb.com/v2/search/geo/point?lat=33.456128218&lng=111.982&radius=25&key=979ae9e5acc66f5be19a1ce3d59acb3f'
-//     )
-//     .then(response => {
-//       res.status(200).send(response.data);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
-
-// app.get("/test", (req, res) => {
-//     brewDB.search.breweries({ q: "FW4NLn" }, (param1, data) => {
-//       res.status(200).send(data);
-//       console.log(data);
-//     });
-// }
-// )
-
-// app.get("/test", (req, res) => {
-//     brewDB.beer.getById("QwmAOE", {withIngredients: 'Y'},  (param1, data) => {
-//       res.status(200).send(data);
-//       console.log(data);
-//     });
-// }
-// )
-
-//carton FW4NLn
-///brewery/:breweryId/beers
-
-// app.get("/test", (req, res) => {
-//   brewDB.beer.getById(
-//     "kIwONj",
-//     { withBreweries: "Y", withIngredients: "Y" },
-//     (param1, param2) => {
-//       res.status(200).send(param2);
-//     }
-//   );
-// });
-
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
+
+
+
+module.exports.client = client
+
 
 // => gets all info about a particualr beer, including where you can find the beer and ingredients
 

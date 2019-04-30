@@ -20,9 +20,9 @@ class App extends Component {
     this.checkSession();
   }
 
-  signIn = (username, password) => {
+  signIn = (username, password, textNotifications) => {
     axios
-      .post("/signin", { username, password })
+      .post("/signin", { username, password, textNotifications })
       .then(res => {
         this.setState({
           hasActiveSession: res.data
@@ -33,9 +33,9 @@ class App extends Component {
       });
   };
 
-  submit = (username, password) => {
+  submit = (username, password, textNotifications, number) => {
     axios
-      .post("/signup", { username, password })
+      .post("/signup", { username, password, textNotifications, number })
       .then(res => {
         if (res.data) {
           this.setState({
@@ -48,6 +48,12 @@ class App extends Component {
         switch (error.request.response) {
           case "username_taken":
             return alert("That username is taken");
+          case "Invalid Username":
+            return alert('That is an invalid username');
+          case "Invalid password":
+            return alert('Invalid password');
+          case ('invalid phone'):
+            return alert('That phone number is invalid')
           default:
             return alert("An unknown error has occured. Sorry..");
         }
