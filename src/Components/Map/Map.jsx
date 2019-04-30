@@ -13,16 +13,16 @@ export default function Map(props) {
         lng: props.center.longitide
     }
   return (
-    <div style={{ width: "600px", height: "600px" }}>
-      {console.log(props)}
+    <div style={{ width: "400px", height: "400px" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyD7oSdpPi7cjxum-43AU_Kmkq8LQG8tASI" }}
         defaultCenter={props.center}
-        defaultZoom={10}
+        defaultZoom={9.5}
       >
         {props.markers.map(marker => { 
+          // console.log(marker)
           return (
-            <MapMarker lat={marker.lat} lng={marker.lng} />
+            <MapMarker /*backHome = { props.backHome }*/ lat={marker.lat} lng={marker.lng} name={marker.name} address={marker.address} id={marker.id} distance={marker.distance} />
           )
         })}
       </GoogleMapReact>

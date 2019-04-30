@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import SignUp from "./Components/SignUp/SignUp";
-import SignIn from './Components/SignIn/SignIn'
+import SignIn from "./Components/SignIn/SignIn";
 import Home from "./Components/Home/Home";
 import axios from "axios";
 import "./App.css";

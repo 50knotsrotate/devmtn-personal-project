@@ -12,11 +12,11 @@ module.exports = {
           return res.status(404).send("username_taken");
         } else {
           const newUser = await db.create_user([username, hash]);
-          const { user_id, belch_points } = newUser[0];
+          const { id, belch_points } = newUser[0];
 
           req.session.user = {
             username: newUser[0].username,
-            user_id,
+            id,
             is_premium_user: newUser[0].premium_user === "yes",
             belch_points
           };
@@ -33,10 +33,10 @@ module.exports = {
     if (user.length) {
       bcrypt.compare(password, user[0].password).then(result => {
         if (result) {
-          const { user_id, belch_points } = user[0];
+          const { id, belch_points } = user[0];
           req.session.user = {
             username: user[0].username,
-            user_id,
+            id,
             is_premium_user: user[0].premium_user === "yes",
             belch_points
           };
@@ -52,11 +52,11 @@ module.exports = {
     }
   },
   logout: (req, res) => { 
-    console.log(req.session)
+
     req.session.destroy()
     return res.status(200).send(req.session)
   },
-  checkSession: (req, res) => { 
+  checkSession: (req, res) => { //could probably just use middleware for this... I'll leave it for now!
     if (req.session.user) {
       res.status(200).send(req.session.user)
     } else {

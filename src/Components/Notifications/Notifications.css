@@ -1,0 +1,62 @@
+
+
+.notifications {
+    width: 50%;
+    height: 75vh;
+    margin: 0 auto;
+    /* overflow-y: scroll; */
+    border: 1px solid red;
+    text-align: center;
+}
+
+.notification {
+    width: 90%;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+
+.premium-notification {
+    background-color: rgba(0,0,0,.5);
+    text-align: center; 
+    animation-name: pronotification;
+    animation-duration: 3s;
+    animation-delay: 0s;
+}
+.premium-notification h3 {
+   
+    animation-name: pronotificationtext;
+    animation-duration: 5s;
+    animation-delay: 0;
+}
+
+.pro-signup {
+    color: blue;
+    text-decoration: underline;
+}
+
+@keyframes pronotification {
+    0% {
+        background-color: white;
+       
+    }
+
+    100% {
+        background-color: rgba(0,0,0,0.5);
+    }
+
+}
+
+@keyframes pronotification {
+    0% {
+        background-color: white;
+       
+    }
+
+    100% {
+        background-color: rgba(0,0,0,0.5);
+    }
+
+}
+

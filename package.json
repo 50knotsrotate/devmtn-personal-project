@@ -7,10 +7,12 @@
     "axios": "^0.18.0",
     "bcrypt": "^3.0.6",
     "brewerydb-node": "0.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "google-map-react": "^1.1.4",
+    "howler": "^2.1.2",
     "massive": "^5.7.7",
     "query-string": "^6.4.2",
     "react": "^16.8.6",
@@ -19,7 +21,10 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
-    "redux": "^4.0.1"
+    "react-stripe-checkout": "^2.6.3",
+    "react-stripe-elements": "^3.0.0",
+    "redux": "^4.0.1",
+    "stripe": "^6.31.1"
   },
   "scripts": {
     "start": "react-scripts start",

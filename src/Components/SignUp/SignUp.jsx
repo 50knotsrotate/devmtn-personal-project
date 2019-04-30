@@ -30,7 +30,7 @@ export default class SignUp extends Component {
 
 
   componentDidMount() {
-    console.log('ayy')
+    // console.log('ayy')
   }
 
   logout = () => {

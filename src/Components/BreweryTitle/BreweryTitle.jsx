@@ -12,7 +12,6 @@ export default class Brewery extends Component {
         const shortenedDescription =this.props.description && ( this.props.description.split('').length > 250 ? this.props.description.slice(0,250) + '...' : this.props.description )
     return (
       <div className="brewery-container">
-        {console.log(this.props)}
         <div className="container-left">
           <img
             src={this.props.image}
@@ -29,7 +28,7 @@ export default class Brewery extends Component {
                     <h5>{this.props.address}</h5>
                     <hr />
                     <br />
-                    {shortenedDescription ? <h6>{shortenedDescription}</h6> : <h5>We are a brewery that takes pride in NOT giving our brewery a description. People dont come for the beer. They just dont come at all.</h5>}
+                    {shortenedDescription ? <h6>{shortenedDescription}</h6> : <h5>We dont need to put a description because that's not what we are about, because people dont come for the beer. They just dont come at all.</h5>}
           </div>
         </div>
       </div>

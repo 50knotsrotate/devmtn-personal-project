@@ -1,16 +1,21 @@
 import React from "react";
 import "./NavBar.css";
+import { Link } from 'react-router-dom'
+import hamburgerIcon from '../../assets/hamburger-icon.jpg'
+import NavModal from '../NavModal/NavModal'
 
 export default function NavBar(props) {
   return (
     <div className="nav-bar">
-      <h1> Hello {props.user.username}!</h1>
+      <NavModal toggle={props.toggle} show={props.showModal} />
+      <h1> Belch </h1>
           <div className="nav-items">
-              <li><a onClick={props.backHome} href = '/#'>Home</a></li>
-              <li><a href = '/#'>My activity</a></li>
+              <li><a onClick={() => props.backHome(true)} href = '/#'>Home</a></li>
+        <Link onClick={() => props.backHome(false)} to = '/notifications'><li><a href = '/#'>My activity</a></li></Link>
               <li><a href = '/#'>Store</a></li>
-        <button onClick={props.logout}>Logout</button>
+        <button className = 'logout' onClick={props.logout}>Logout</button>
       </div>
+      <img src={hamburgerIcon} className='hamburger-icon' alt='nav dropdown menu' onClick={props.toggleModal}/>
     </div>
   );
 }
