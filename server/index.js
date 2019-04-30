@@ -8,7 +8,7 @@ const massive = require("massive");
 const breweryDB = require("brewerydb-node");
 const session = require("express-session");
 const axios = require("axios");
-const stripe = require("stripe")("sk_test_G8dVhSMIYUb4k5T0DO6Fu0Ci00KM5O8VDz");
+const stripe = require("stripe")("My key");
 
 
 const {
