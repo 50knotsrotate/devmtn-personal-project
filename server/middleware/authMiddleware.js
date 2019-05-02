@@ -1,7 +1,6 @@
 module.exports = {
     checkCredentials: (req, res, next) => { 
         const { username, password, number } = req.body;
-        console.log(req.body)
         
         if (!username.length) {
             return res.status(404).send('Invalid Username')
@@ -11,6 +10,14 @@ module.exports = {
             return res.status(404).send('invalid phone')
         } else { 
             next()
+        }
+    },
+    validatePhone: (req, res, next) => { 
+        const { number } = req.body
+        if (number.length == 10) {
+            next()
+        } else {
+            res.sendStatus(500)
         }
     }
 }

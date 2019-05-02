@@ -25,7 +25,7 @@ create table users(
 
 create table comments(
     id serial primary key,
-    user_id varchar(20),
+    user_id integer references users(id),
     brewery_id varchar(20),
     content text,
     rating integer,
@@ -36,7 +36,7 @@ create table notifications (
     id serial primary key, 
     user_id integer,
     content varchar(100),
-    is_new varchar(5)
+    is_new integer
 );
 
 
@@ -57,6 +57,4 @@ values(1,'ZaaAPU', 'this plase rools', 5, 1),
 
 insert into store (name, description, price, image, handler)
 values('Suddenly: Chuck', 'Blow up your friends (or foes) phones with Chuck Norris jokes. Issues 5 jokes.', 10, 'https:
-//bloximages.chicago2.vip.townnews.com/starlocalmedia.com/content/tncms/assets/v3/editorial/7/ac/7acc5b1a-fa38-11e6-8b8d-17bb329f36ad/58af998ca4171.image.jpg', 'getChucked'),
-('YodaBomb', 'Chooses a random Belcher and, for one whole day, will give their website a yoda theme, and translate all of their reviews into yoda speak. There is nothing they can do about this.', 20, 'http:
-//starwarsblog.starwars.com/wp-content/uploads/2016/05/yoda2-1088x816-946591877564.jpg', 'yodaBomb');
+//bloximages.chicago2.vip.townnews.com/starlocalmedia.com/content/tncms/assets/v3/editorial/7/ac/7acc5b1a-fa38-11e6-8b8d-17bb329f36ad/58af998ca4171.image.jpg', 'getChucked');

@@ -1,17 +1,8 @@
-/* global google */
-import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import MapMarker from '../MapMarker/MapMarker'
-
-
+import React from "react";
+import GoogleMapReact from "google-map-react";
+import MapMarker from "../MapMarker/MapMarker";
 
 export default function Map(props) {
-
-
-    const center = {
-        lat: props.center.latitude,
-        lng: props.center.longitide
-    }
   return (
     <div style={{ width: "400px", height: "400px" }}>
       <GoogleMapReact
@@ -19,16 +10,20 @@ export default function Map(props) {
         defaultCenter={props.center}
         defaultZoom={9.5}
       >
-        
-        {props.markers.map(marker => { 
-          // console.log(marker)
+        {props.markers.map((marker, i) => {
           return (
-            <MapMarker /*backHome = { props.backHome }*/ lat={marker.lat} lng={marker.lng} name={marker.name} address={marker.address} id={marker.id} distance={marker.distance} />
-          )
+            <MapMarker
+              key={i}
+              lat={marker.lat}
+              lng={marker.lng}
+              name={marker.name}
+              address={marker.address}
+              id={marker.id}
+              distance={marker.distance}
+            />
+          );
         })}
-
-        
       </GoogleMapReact>
     </div>
-  ); 
- }
+  );
+}

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./SignUp.css";
-//import authRoutes from '../../Components/Routes/AuthRoutes'
-import { Link, Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
+import { createSession } from '../../ducks/sessionReducer';
 import axios from "axios";
-import Home from "../Home/Home";
+import { Link } from "react-router-dom";
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
@@ -17,6 +17,35 @@ export default class SignUp extends Component {
       user: null
     };
   }
+
+  signUp = (username, password, textNotifications, number) => {
+    //create a user object
+    axios
+      .post("/signup", { username, password, textNotifications, number })
+      .then(user => {
+        this.props.createSession(user.data); //inserts new user into DB, creates a session, and uses session for props
+        
+      })
+      .catch(err => {
+        this.props.history.goBack(); 
+        this.errorHandler(err);
+      });
+  };
+
+    errorHandler = err => {
+    switch (err.request.response) {
+      case "username_taken":
+        return alert("That username is taken");
+      case "Invalid Username":
+        return alert("That is an invalid username");
+      case "Invalid password":
+        return alert("Invalid password");
+      case "invalid phone":
+        return alert("That phone number is invalid");
+      default:
+        return alert("An unknown error has occured. Sorry..");
+    }
+  };
 
   handleUsernameInput(val) {
     this.setState({
@@ -30,31 +59,17 @@ export default class SignUp extends Component {
     });
   }
 
-  onNumber = number => { 
+  onNumber = number => {
     this.setState({
       number
-    })
-  }
-
-
-  componentDidMount() {
-    // console.log('ayy')
-  }
-
-  logout = () => {
-    axios.get("/logout").then(res => { 
-      this.setState({
-        user: null
-      })
-    })
+    });
   };
 
   toggleText = () => {
     this.setState({
       textNotifications: !this.state.textNotifications
-    })
-    console.log(this.state.textNotifications)
-  }
+    });
+  };
 
   render() {
     const form = (
@@ -80,27 +95,52 @@ export default class SignUp extends Component {
             <h4>I would like to recive text notifications</h4>
             <input type="checkbox" onChange={e => this.toggleText(e)} />
             {this.state.textNotifications && (
-              <input type='text' className='text-number' placeholder='No spaces of dashes. Dont worry, we encrypt these.' onChange={e => this.onNumber(e.target.value)} value={this.state.number} />
+              <input
+                type="text"
+                className="text-number"
+                placeholder="No spaces of dashes. Dont worry, we encrypt these."
+                onChange={e => this.onNumber(e.target.value)}
+                value={this.state.number}
+              />
             )}
           </div>
-          {/* <br /> */}
           <button
             className="sign-up-button"
             onClick={() =>
-              this.props.submit(this.state.username, this.state.password, this.state.textNotifications, this.state.number)
+              this.signUp(
+                this.state.username,
+                this.state.password,
+                this.state.textNotifications,
+                this.state.number
+              )
             }
           >
-            Sign Up
+            <Link to="/home">Sign Up</Link>
           </button>
-          <h2 onClick={this.props.signIn}>Already have an account?</h2>
+          <Link to="/">
+            <h2>Already have an account?</h2>
+          </Link>
         </div>
       </div>
     );
 
-    return (
-      <div>
-        {form}
-      </div>
-    );
+    return <div>{form}</div>;
   }
 }
+
+const mapStateToProps = reduxState => {
+  return {
+    user: reduxState.session.user
+  };
+};
+
+const mapDispatchToProps = {
+  createSession
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);
+
+

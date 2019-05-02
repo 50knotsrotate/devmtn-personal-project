@@ -5,7 +5,6 @@ import BreweryTitle from "../BreweryTitle/BreweryTitle";
 import Map from "../Map/Map";
 import { Link } from "react-router-dom";
 import routes from "../Routes/homeRoutes";
-import Stars from "../Stars/Stars";
 import "./Home.css";
 
 export default class Home extends Component {
@@ -22,12 +21,13 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-   navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.getCurrentPosition(position => {
       const { latitude, longitude } = position.coords;
+
       this.setState({
         location: { lat: latitude, lng: longitude }
       });
-     
+
       axios
         .post("/test", { latitude, longitude })
         .then(res => {
@@ -74,6 +74,7 @@ export default class Home extends Component {
       ? this.state.breweries.map((brew, i) => {
           return (
             <Link
+              key={i}
               onClick={() => this.toggleShow(false)}
               to={`/breweries/${brew.id}?name=${brew.brewery.name}&address=${
                 brew.streetAddress
@@ -99,10 +100,10 @@ export default class Home extends Component {
         <NavBar
           backHome={this.toggleShow}
           user={this.props.user}
-          logout={this.props.logout}
           showModal={this.state.showModal}
           toggleModal={this.showModal}
         />
+        {/* {navRoutes instead of this mumbo jumbo} */}
         {this.state.show && this.state.location ? (
           <div className="logged-in-root">
             <button onClick={this.toggleMap}>Toggle Map</button>

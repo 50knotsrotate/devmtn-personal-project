@@ -1,20 +1,18 @@
 import React from "react";
-import { Link } from 'react-router-dom'
 import "./Modal.css";
 
 export default function Modal(props) {
   return (
-      <div>
+    <div>
       {props.type ? ( //props.type because I am sharing this modal with another component
-        <div className='map'>
+        <div className="map">
           <h2>{props.name}</h2>
           <h3>{props.distance} miles</h3>
-                  <h4>{props.address}</h4>
-                  {/* <Link to={`/breweries/${props.id}?name=${props.name}&address=${props.address}`}><h3 onClick={props.backHome}>Go here!</h3></Link>  */}
+          <h4>{props.address}</h4>
         </div>
       ) : (
-        <div className = 'modal'>
-              <h1>{props.name}</h1>
+        <div className="modal">
+          <h1>{props.name}</h1>
           <h3>{props.text}</h3>
         </div>
       )}
