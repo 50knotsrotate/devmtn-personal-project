@@ -39,7 +39,11 @@ module.exports = {
   sign_in: async (req, res) => {
     const db = req.app.get("db");
     const { username, password } = req.body;
+    console.log('username below')
+    console.log(username)
     const user = await db.find_user([username]);
+    console.log('user below')
+    console.log(user)
     if (user.length) {
       bcrypt.compare(password, user[0].password).then(result => {
         if (result) {
@@ -51,6 +55,7 @@ module.exports = {
             belch_points,
             text_notifications
           };
+          console.log(req.session.user)
           return res.status(200).send(req.session.user);
         } else {
           return res.status(404).send("Incorrect Password");
@@ -100,6 +105,7 @@ module.exports = {
     });
   },
   purchasePremium: (req, res) => {
+    console.log(req.body)
     stripe.stripe.charges
       .create({
         amount: 99,

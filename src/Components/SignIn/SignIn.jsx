@@ -15,9 +15,10 @@ class SignIn extends Component {
     };
   }
 
-  signIn = (username, password, textNotifications) => {
+  signIn = () => {
+    const { username, password} = this.state
     axios
-      .get("/signin", { username, password, textNotifications })
+      .post("/signin", {username, password})
       .then(user => {
         this.props.createSession(user.data);
         // this.props.goBack()
@@ -44,28 +45,35 @@ class SignIn extends Component {
     const form = (
       <div className="sign-up">
         <div className="sign-up-form">
-          <h1>Sign into Belch</h1>
           <div className="form">
-            <input
-              type="text"
-              placeholder="Username"
-              className="input-field"
-              onChange={e => this.handleUsernameInput(e.target.value)}
-            />
-            <br />
-            <input
-              type="text"
-              onChange={e => this.handlePasswordInput(e.target.value)}
-              placeholder="Password"
-              className="input-field"
-            />
-            <br />
+          <h2>Sign into Belch</h2>
+            <div>
+              <h2>Username</h2>
+              <input
+                type="text"
+                placeholder="Username"
+                className="input-field"
+                onChange={e => this.handleUsernameInput(e.target.value)}
+                value={this.state.username}
+              />
+            </div>
+            <div>
+              <h2>Password</h2>
+              <input
+                type="text"
+                onChange={e => this.handlePasswordInput(e.target.value)}
+                placeholder="Password"
+                className="input-field"
+                value={this.state.password}
+              />
+            </div>
+            <button onClick={this.signIn} className = 'sign-up-button'>
+              <Link to="/home">Sign In</Link>
+            </button>
+            <Link to="/signUp">
+              <h3>Need to make an account?</h3>
+            </Link>
           </div>
-          <br />
-         <button onClick={this.signIn}><Link to = '/home'>Sign In</Link></button>
-          <Link to="/signUp">
-            <h2>Need to make an account?</h2>
-          </Link>
         </div>
       </div>
     );
