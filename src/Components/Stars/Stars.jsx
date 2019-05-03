@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Star from "./Star";
-import './Star.css'
+import "./Star.css";
 
 export default class Stars extends Component {
   constructor() {
@@ -35,21 +35,24 @@ export default class Stars extends Component {
     this.setState({
       submitted: !this.state.submitted
     });
-    this.props.onRate(num)
+    this.props.onRate(num);
   };
 
   render() {
     const stars = [];
 
-    for (let i = 1; i < this.state.starCount; i++) {
+    for (let i = 0; i < this.state.starCount - 1; i++) {
       stars.push(
         <Star
           isLit={
             this.props.rating ? i <= this.props.rating : this.state.num >= i
           }
           hover={() => this.hover(i)}
+          key={i}
           toggleSubmitted={this.submitRating}
-          submit={this.props.onRate ? () => this.submitRating(this.state.num) : null }
+          submit={
+            this.props.onRate ? () => this.submitRating(this.state.num) : null
+          }
         />
       );
     }

@@ -1,6 +1,5 @@
 .Brewery-info {
-    background-image: url('https://wallpapercave.com/wp/8dsyKCf.jpg');
-    width: 100vw;
+    /* background-image: url('https://wallpapercave.com/wp/8dsyKCf.jpg'); */
     height: 100%;
     background-size: cover;
     background-position: center;
@@ -18,16 +17,15 @@
 }
 
 .broobroo {
-    width: 100vw;
-    /* height: auto; */
+    width: 80vw;
+    background-color: rgba(0,0,0,.5);
     max-height: 1000px;
     overflow-x: hidden;
     display: flex;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    /* overflow-y: hidden; */
- 
+    margin: 0 auto;
 }
 
 
@@ -136,9 +134,17 @@
       animation-name: review;
       animation-duration: 3s;
       animation-iteration-count: 1;
-      animation-timing-function: linear;
-      
+      animation-timing-function: linear;   
 
+}
+
+.comment-button {
+    width: 100%;
+    font-size: 1.5em;
+    font-family: Arial;
+    background-color: rgb(92, 184, 92);
+    color: white;
+    font-weight: bold;
 }
 
 @media only screen and (max-width: 830px) {

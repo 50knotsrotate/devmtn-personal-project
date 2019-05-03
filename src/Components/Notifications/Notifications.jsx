@@ -1,36 +1,38 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
 import { Elements, StripeProvider } from "react-stripe-elements";
+import { getSession } from "../../ducks/sessionReducer";
+import { connect } from "react-redux";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import "./Notifications.css";
 
-export default class Notifications extends Component {
+class Notifications extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notifications: null,
-      notificationsCopy: null,
-      isPremiumUser: true,
+      notifications:null,
+      myComments: null,
       showModal: false
     };
   }
   componentWillMount() {
-    Axios.get("/getNotifications").then(res => {
-      Axios.get("/checkSession").then(session => {
+    Axios.get("/notifications").then(res => {
+      Axios.get("/session").then(session => {
+        this.props.getSession(session.data);
         this.setState({
-          notifications: res.data,
-          notificationsCopy: res.data.filter(notif => notif.is_new == "true"),
-          isPremiumUser: session.data.is_premium_user == "true"
+          notifications: res.data.filter(notif => notif.is_new)
         });
       });
     });
-    console.log(this.state.isPremiumUser);
   }
 
   componentWillUnmount() {
-    Axios.put("/updateNotifications")
-      .then(res => {})
+    Axios.put("/notifications")
+      .then(res => {
+        //This takes all notifications that belong to the user which are NEW(unread), and puts them into OLD.
+        //This way, notifications only show up in NEW when they have not been seen yet.
+        // See server / controllers / notificationsController
+      })
       .catch(err => {
         alert(err.request.response);
       });
@@ -42,25 +44,21 @@ export default class Notifications extends Component {
     });
   };
 
-  getOldNotifications = () => {
-    this.setState({
-      notificationsCopy: this.state.notifications.filter(
-        notif => notif.is_new == "false"
-      )
-    });
+  getComments = () => {
+    
   };
 
   getNewNotifications = () => {
     this.setState({
-      notificationsCopy: this.state.notifications.filter(
-        notif => notif.is_new == "true"
+      notifications: this.state.notifications.filter(
+        notif => notif.is_new
       )
     });
   };
   render() {
     return (
       <div>
-        {!this.state.isPremiumUser && (
+        {!this.props.user.is_premium_user && (
           <div className="premium-notification">
             <h3>
               Note: Since you are not a premium user, you cannot claim your
@@ -79,14 +77,14 @@ export default class Notifications extends Component {
             </Elements>
           </StripeProvider>
         )}
-        <button onClick={this.getOldNotifications}>Old</button>
+        <button onClick={this.getComments}>My Comments</button>
         <button onClick={this.getNewNotifications}>New</button>
         <div className="notifications">
           {this.state.notifications
-            ? this.state.notificationsCopy.map(notif => {
+            ? this.state.notifications.map(notif => {
                 return (
                   <div className="notification">
-                    <h1>{notif.content}</h1>
+                    <h2>{notif.content}</h2>
                   </div>
                 );
               })
@@ -96,3 +94,18 @@ export default class Notifications extends Component {
     );
   }
 }
+
+const mapStateToProps = redux => {
+  return {
+    user: redux.session.user
+  };
+};
+
+const mapDispatchToProps = {
+  getSession
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notifications);

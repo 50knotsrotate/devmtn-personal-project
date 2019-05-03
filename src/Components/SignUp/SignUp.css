@@ -2,7 +2,6 @@
     background:
     linear-gradient(rgba(0, 0, 0, 0.7),
     rgba(0, 0, 0, 0.7)),
-    /* bottom, image */
     url('../../assets/beer.jpg');
     width: 100vw;
     height: 100vh;
@@ -20,13 +19,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-     /* text-align: center; */
+      text-align: center;
     width: 90%;
     margin: 0 auto;
     min-width: 100px;
     background: rgba(0,0,0,.5);
     border-radius: 10px;
-    height: 100%;
 }
 
 .sign-up-form {
@@ -37,6 +35,13 @@ text-align: center;
   font-size: 4em;
   color: white;
   font-family: monospace;
+} 
+
+.text-number {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .input-field {

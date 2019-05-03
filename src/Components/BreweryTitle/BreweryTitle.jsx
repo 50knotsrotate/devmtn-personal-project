@@ -8,8 +8,12 @@ export default class Brewery extends Component {
     this.state = {};
   }
 
-    render() {
-        const shortenedDescription =this.props.description && ( this.props.description.split('').length > 250 ? this.props.description.slice(0,250) + '...' : this.props.description )
+  render() {
+    const shortenedDescription =
+      this.props.description &&
+      (this.props.description.split("").length > 250
+        ? this.props.description.slice(0, 250) + "..."
+        : this.props.description); //Trimming down the brewery description for the ones that are too long
     return (
       <div className="brewery-container">
         <div className="container-left">
@@ -25,10 +29,18 @@ export default class Brewery extends Component {
             <h4>{this.props.distance} mi.</h4>
           </div>
           <div className="bottom">
-                    <h5>{this.props.address}</h5>
-                    <hr />
-                    <br />
-                    {shortenedDescription ? <h6>{shortenedDescription}</h6> : <h5>We dont need to put a description because that's not what we are about, because people dont come for the beer. They just dont come at all.</h5>}
+            <h5>{this.props.address}</h5>
+            <hr />
+            <br />
+            {shortenedDescription ? (
+              <h6>{shortenedDescription}</h6>
+            ) : (
+              <h4>
+                We dont need to put a description because that's not what we are
+                about, because people dont come for the beer. They just dont
+                come at all.
+              </h4>
+            )}
           </div>
         </div>
       </div>

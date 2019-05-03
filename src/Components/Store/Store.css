@@ -1,0 +1,12 @@
+.store {
+    border: 9px solid black ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.items {
+    margin-top: 50px;
+}
+

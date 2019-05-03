@@ -1,11 +1,11 @@
 .brewery-container {
-    background-color: rgba(0,0,0,.7);
-    margin: 10px;
-    width: 100%;
+    background-color: rgba(0,0,0,.8);
+    margin: 10px auto;
+    width: 90%;
     /* padding: 10px; */
     color: white;
     display: flex;
-    border: 3px solid white;
+    border: 3px solid black;
     border-radius: 10px;
     
 }
@@ -36,7 +36,7 @@
   
 }
 
-@media only screen and (max-width: 875px){
+@media only screen and (max-width: 600px){
     /* was 675 */
     .brewery-container {
         flex-direction: column;
@@ -60,6 +60,8 @@
 
     .brewery-title-image {
         margin-top: 10px;
+        width: 150px;
+        height: 250px;
     }
 }
 

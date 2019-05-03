@@ -1,4 +1,7 @@
 require("dotenv").config();
+
+//server variables
+=======
 const authController = require("./Controllers/authController");
 const commentsController = require("./Controllers/commentsController");
 const notificationsController = require('./Controllers/notificationsController')
@@ -8,7 +11,7 @@ const massive = require("massive");
 const breweryDB = require("brewerydb-node");
 const session = require("express-session");
 const axios = require("axios");
-const stripe = require("stripe")("My key");
+
 
 
 const {
@@ -17,146 +20,98 @@ const {
   CONNECTION_STRING,
   SESSION_SECRET,
   SANDBOX_API,
-  STRIPE_KEY
+  STRIPE_KEY,
+  TWILIO_SID,
+  TWILIO_AUTH_TOKEN,
+  STRIPE_SK_TEST
 } = process.env;
-const brewDB = new breweryDB(API_KEY);
+//Controllers
+const notificationsController = require("./Controllers/notificationsController");
+const commentsController = require("./Controllers/commentsController");
+const twilioController = require("./Controllers/twilioController");
+const storeController = require('./Controllers/storeController')
+const authController = require("./Controllers/authController");
+const beerController = require('./Controllers/beerController')
 
-app.use(express.json());
+//Middleware
+const authMiddleware = require("./middleware/authMiddleware");
+const userMiddleware = require("./middleware/userMiddleware");
 
+const signUpMiddleware = [
+  authMiddleware.checkCredentials,
+  authController.sign_up,
+  twilioController.welcome
+];
+const chuckNorrisMiddleware = [
+  userMiddleware.premiumUsersOnly,
+  authMiddleware.validatePhone,
+  userMiddleware.checkBelchPoints,
+  twilioController.sendChuck,
+  userMiddleware.deductBelch
+];
+
+//dependencies
+const express = require("express");
+const app = express();
+const massive = require("massive");
+const session = require("express-session");
+const stripe = require("stripe")(STRIPE_SK_TEST);
+const client = require("twilio")(TWILIO_SID, TWILIO_AUTH_TOKEN);
+
+//Top level middleware
+app.use(express.json())
 app.use(
   session({
     secret: SESSION_SECRET,
-    resave: null, //here
+    resave: null,
     saveUninitialized: true,
     cookie: { maxAge: 100000000 }
   })
 );
 
+//Connection to SQL database
 massive(CONNECTION_STRING)
   .then(db => {
     app.set("db", db);
     console.log("connected to db");
     db.init();
   })
-  .catch(err => {
-    console.log("Failed to connect to DB");
-  });
+  .catch(err => console.log('failed to connect to db'))
 
-app.post("/signup", authController.sign_up);
-app.post("/signin", authController.sign_in);
-app.get("/logout", authController.logout);
-app.get("/checksession", authController.checkSession);
+//Auth endpoints
+app.post("/signup", ...signUpMiddleware);
+app.get("/signin", authController.sign_in);
+app.delete("/logout", authController.logout);
+app.put("/user", authController.updateToPremium);
 
-app.get("/breweryInfo", function(req, res) {
-  //res.status(200).send('ayy')
+//Used exclusively by redux for keeping up with changes on the backend.
+app.get("/session", authController.getSession);
 
-  const { id } = req.query;
-  axios
-    .get(
-      `https://api.brewerydb.com/v2/brewery/${id}/beers?key=${API_KEY}&withBreweries=Y&withSocialAccounts=Y&withIngredients=Y`
-    )
-    .then(response => {
-      res.status(200).send(response.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-
+//Comment endpoints
 app.get("/comments/:id", commentsController.getComments);
 app.post("/comments/:id", commentsController.addComment);
+app.put("/comments/:id", commentsController.editComment);
+app.delete("/comments/:id", commentsController.deleteComment);
 
-app.put('/updateUser/', function (req, res) { 
-  const db = req.app.get('db');
-  const { id } = req.session.user
-  
-  db.pro(id).then(response => { 
-    req.session.user.is_premium_user = 'true'
-    console.log(req.session.user)
-    res.status(200).send(response)
-  })
-})
+//Notification endpoints
+app.put("/notifications", notificationsController.updateNotifications);
+app.get("/notifications", notificationsController.getNotifications);
 
-// app.get("/ayy", function(req, res) {
-//   brewDB.beer.getById("eGXsfq", {}, function(err, data) {
-//     res.status(200).send(data);
-//   });
-// });
+//Brewery info
+app.post("/test", beerController.breweryLocation);
+app.get("/breweryInfo", beerController.breweryInfo);
 
-app.put("/updateNotifications", notificationsController.updateNotifications);
-app.get('/getNotifications', notificationsController.getNotifications);
+//Store
+app.post("/chuck", ...chuckNorrisMiddleware);
+app.get("/store", storeController.getStore);
+
+//For Stripe payments
+app.post("/charge", authController.purchasePremium);
 
 
-app.post("/charge", (req, res) => {
-  stripe.charges.create({
-    amount: 99,
-    currency: 'usd',
-    description: 'Thanks for joining us!',
-    source: req.body.token.id
-  }).then(response => { 
-    res.status(200).send(response)
-  })
-});
+app.listen(PORT, () => { console.log(`Listening on ${PORT}`) });
 
-app.post("/test", (req, res) => {
-  const { latitude, longitude } = req.body
-
-  axios
-    .get(`https://api.brewerydb.com/v2/search/geo/point?lat=${latitude}&lng=${longitude}&key=${API_KEY}&radius=30`)
-    .then(response => {
-      res.status(200).send(response.data);
-    }).catch(err => {
-      console.log(err)
-    })
-});
-
-
-// app.get("/test", function(req, res) {
-//   axios
-//     .get(
-//       'https://api.brewerydb.com/v2/search/geo/point?lat=33.456128218&lng=111.982&radius=25&key=979ae9e5acc66f5be19a1ce3d59acb3f'
-//     )
-//     .then(response => {
-//       res.status(200).send(response.data);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
-
-// app.get("/test", (req, res) => {
-//     brewDB.search.breweries({ q: "FW4NLn" }, (param1, data) => {
-//       res.status(200).send(data);
-//       console.log(data);
-//     });
-// }
-// )
-
-// app.get("/test", (req, res) => {
-//     brewDB.beer.getById("QwmAOE", {withIngredients: 'Y'},  (param1, data) => {
-//       res.status(200).send(data);
-//       console.log(data);
-//     });
-// }
-// )
-
-//carton FW4NLn
-///brewery/:breweryId/beers
-
-// app.get("/test", (req, res) => {
-//   brewDB.beer.getById(
-//     "kIwONj",
-//     { withBreweries: "Y", withIngredients: "Y" },
-//     (param1, param2) => {
-//       res.status(200).send(param2);
-//     }
-//   );
-// });
-
-app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
-
-// => gets all info about a particualr beer, including where you can find the beer and ingredients
+module.exports.client = client;
+module.exports.API_KEY = API_KEY;
+module.exports.stripe = stripe
 

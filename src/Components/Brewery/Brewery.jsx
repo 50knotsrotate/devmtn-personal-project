@@ -3,8 +3,8 @@ import axios from "axios";
 import queryString from "query-string";
 import "./BreweryPage.css";
 import Modal from "../Modal/Modal";
-import Stars from '../Stars/Stars'
-import CommentModal from '../commentModal/commentModal'
+import Stars from "../Stars/Stars";
+import CommentModal from "../commentModal/commentModal";
 
 export default class Brewery extends Component {
   constructor(props) {
@@ -23,14 +23,19 @@ export default class Brewery extends Component {
   componentDidMount() {
     const dataFromLink = queryString.parse(this.props.location.search);
     axios.get(`/breweryInfo?id=${this.props.match.params.id}`).then(res => {
-      axios.get(`comments/${this.props.match.params.id}`).then(result => {
-        this.setState({
-          data: [...res.data.data, dataFromLink],
-          reviews: result.data
+      if (res.data.length < 3) {
+        alert(
+          "This API decided it does not want to give me data. Sorry folks."
+        );
+      } else {
+        axios.get(`comments/${this.props.match.params.id}`).then(result => {
+          this.setState({
+            data: [...res.data.data, dataFromLink],
+            reviews: result.data
+          });
         });
-      });
+      }
     });
-
   }
 
   showDescription = (text, i) => {
@@ -43,8 +48,8 @@ export default class Brewery extends Component {
   toggleReviews = () => {
     this.setState({
       showReviews: !this.state.showReviews
-    })
-  }
+    });
+  };
 
   handleCommentInput = val => {
     this.setState({
@@ -61,14 +66,13 @@ export default class Brewery extends Component {
     }
   };
 
-  toggleCommentModal = () => { 
+  toggleCommentModal = () => {
     this.setState({
       showCommentModal: !this.state.showCommentModal
-    })
-  }
+    });
+  };
 
   submitComment = (text, rating) => {
-    this.toggleCommentModal() 
     axios
       .post(`/comments/${this.props.match.params.id}`, {
         content: text,
@@ -77,13 +81,13 @@ export default class Brewery extends Component {
       })
       .then(res => {
         this.setState({
-          reviews: [...this.state.reviews, res.data[0]]
+          reviews: res.data,
+          showCommentModal: false
         });
       });
   };
 
   render() {
-    console.log(this.props.match.params.id);
     const beers = this.state.data ? (
       this.state.data.map((beer, i) => {
         return (
@@ -98,7 +102,7 @@ export default class Brewery extends Component {
               )
             }
           >
-            {this.state.showModal && i == this.state.currentModal ? (
+            {this.state.showModal && i === this.state.currentModal ? (
               <Modal
                 name={beer.name}
                 text={
@@ -119,11 +123,12 @@ export default class Brewery extends Component {
 
     const reviews = this.state.reviews ? (
       this.state.reviews.map(review => {
+        // comments component here
         return (
           <div className="reviews">
             <div className="comment-top">
-            <Stars rating={review.rating} />
-              <h4>{review.user_id}</h4>
+              <Stars rating={review.rating} />
+              <h4>{review.username}</h4>
             </div>
             <hr />
             <p>{review.content}</p>
@@ -147,23 +152,15 @@ export default class Brewery extends Component {
 
           {this.state.data && <div className="broobroo">{beers}</div>}
         </div>
-        <div
-          className={`toggle-reviews ${
-            this.state.showReviews ? "review" : "info"
-          }`}
-          onClick={this.toggleReviews}
-        >
-          <h1>{this.state.showReviews ? "More-Info" : "Reviews"}</h1>
-        </div>
         {this.state.showReviews ? (
           <div className="comments">
-            {reviews}
             <button
               className="comment-button"
               onClick={this.toggleCommentModal}
             >
-              Write a review
+              + Write a review
             </button>
+            {reviews}
             {this.state.showCommentModal && (
               <CommentModal
                 post={this.submitComment}

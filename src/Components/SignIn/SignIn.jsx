@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import Home from '../Home/Home'
+import { connect } from 'react-redux';
+import { createSession } from '../../ducks/sessionReducer';
+import axios from 'axios';
 
-export default class SignIn extends Component {
+class SignIn extends Component {
   constructor() {
     super();
 
@@ -13,6 +14,19 @@ export default class SignIn extends Component {
       user: null
     };
   }
+
+  signIn = (username, password, textNotifications) => {
+    axios
+      .get("/signin", { username, password, textNotifications })
+      .then(user => {
+        this.props.createSession(user.data);
+        // this.props.goBack()
+      })
+      .catch(err => {
+        this.props.history.goBack()
+        return alert(err.request.response);
+      });
+  };
 
   handleUsernameInput(val) {
     this.setState({
@@ -26,8 +40,6 @@ export default class SignIn extends Component {
     });
   }
 
-
-
   render() {
     const form = (
       <div className="sign-up">
@@ -36,7 +48,7 @@ export default class SignIn extends Component {
           <div className="form">
             <input
               type="text"
-              placeholder="Choose username"
+              placeholder="Username"
               className="input-field"
               onChange={e => this.handleUsernameInput(e.target.value)}
             />
@@ -50,14 +62,29 @@ export default class SignIn extends Component {
             <br />
           </div>
           <br />
-          <button onClick={() => this.props.signIn(this.state.username, this.state.password)} className="sign-up-button">
-            Sign In
-          </button>
-          <h2 onClick={this.props.signUp}>Need to make an account?</h2>
+         <button onClick={this.signIn}><Link to = '/home'>Sign In</Link></button>
+          <Link to="/signUp">
+            <h2>Need to make an account?</h2>
+          </Link>
         </div>
       </div>
     );
 
-      return form
+    return form;
   }
 }
+
+const mapStateToProps = reduxState => {
+  return {
+    user: reduxState.session.user
+  };
+};
+
+const mapDispatchToProps = {
+  createSession
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);
