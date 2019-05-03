@@ -3,6 +3,8 @@ import BreweryTitle from "../BreweryTitle/BreweryTitle";
 import axios from "axios";
 import { Link } from 'react-router-dom'
 
+
+//Could I maybe do this in App and pass the data in?
 export default class Breweries extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +38,7 @@ export default class Breweries extends Component {
   }
   render() {
     return this.state.breweries ? (
-      this.state.breweries.map((brew, i) => {
+      this.state.breweries.map((brew, i) => { //This is a perfect candidate for a stateless component.
           return (
               <Link to={`/breweries/${brew.id}`}>
               <BreweryTitle
@@ -53,7 +55,7 @@ export default class Breweries extends Component {
           );
       })
     ) : (
-      <h2>Loading LOADING AHHH</h2>
+      <h2>Loading LOADING AHHH</h2> //Defintetly gotta stop putting off making the loading modal...
     );
   }
 }

@@ -18,7 +18,7 @@ class Notifications extends Component {
   componentWillMount() {
     Axios.get("/notifications").then(res => {
       Axios.get("/session").then(session => {
-        this.props.getSession(session.data);
+        this.props.getSession(session.data); 
         this.setState({
           notifications: res.data.filter(notif => notif.is_new)
         });
@@ -32,6 +32,7 @@ class Notifications extends Component {
         //This takes all notifications that belong to the user which are NEW(unread), and puts them into OLD.
         //This way, notifications only show up in NEW when they have not been seen yet.
         // See server / controllers / notificationsController
+        //This functionality is in the process of being taken away
       })
       .catch(err => {
         alert(err.request.response);
@@ -45,7 +46,7 @@ class Notifications extends Component {
   };
 
   getComments = () => {
-    
+    //Once I get the comments component finished, this will be used to get all the comments belonging to the current user.
   };
 
   getNewNotifications = () => {
@@ -56,6 +57,7 @@ class Notifications extends Component {
     });
   };
   render() {
+    //We will need routes to toggle between comments and notifications
     return (
       <div>
         {!this.props.user.is_premium_user && (
