@@ -10,7 +10,8 @@ module.exports = {
           key.API_KEY
         }&radius=30`
       )
-      .then(response => {
+        .then(response => {
+          console.log(response)
         res.status(200).send(response.data);
       })
       .catch(err => {

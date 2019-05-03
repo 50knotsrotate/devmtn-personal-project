@@ -47,7 +47,7 @@ module.exports = {
           req.session.user = {
             username: user[0].username,
             id,
-            is_premium_user: user[0].premium_user === "yes",
+            is_premium_user: user[0].premium_user, //if something breaks with premium user, this is why.
             belch_points,
             text_notifications
           };

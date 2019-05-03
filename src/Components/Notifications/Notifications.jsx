@@ -50,7 +50,7 @@ class Notifications extends Component {
 
   getNewNotifications = () => {
     this.setState({
-      notificationsCopy: this.state.notifications.filter(
+      notifications: this.state.notifications.filter(
         notif => notif.is_new
       )
     });

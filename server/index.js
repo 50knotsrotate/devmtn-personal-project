@@ -23,7 +23,6 @@ const beerController = require('./Controllers/beerController')
 const authMiddleware = require("./middleware/authMiddleware");
 const userMiddleware = require("./middleware/userMiddleware");
 
-//Just experimenting with this method of middleware organization (below).
 const signUpMiddleware = [
   authMiddleware.checkCredentials,
   authController.sign_up,
@@ -42,11 +41,8 @@ const express = require("express");
 const app = express();
 const massive = require("massive");
 const session = require("express-session");
-//const axios = require("axios");
 const stripe = require("stripe")(STRIPE_SK_TEST);
 const client = require("twilio")(TWILIO_SID, TWILIO_AUTH_TOKEN);
-// const breweryDB = require("brewerydb-node");
-// const brewDB = new breweryDB(API_KEY); If this does not work for getting brewery info, get rid of and uninstall it. Stupid API.
 
 //Top level middleware
 app.use(express.json())
@@ -55,7 +51,7 @@ app.use(
     secret: SESSION_SECRET,
     resave: null,
     saveUninitialized: true,
-    cookie: { maxAge: 100000 }
+    cookie: { maxAge: 100000000 }
   })
 );
 

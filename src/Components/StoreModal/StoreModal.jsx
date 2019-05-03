@@ -10,7 +10,7 @@ export default class StoreModal extends Component {
     };
     }
     
-  componentWillUnmount = () => { 
+  componentWillMount = () => { 
     this.setState({
       number: ''
     })
