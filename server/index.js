@@ -1,5 +1,19 @@
 require("dotenv").config();
+
 //server variables
+=======
+const authController = require("./Controllers/authController");
+const commentsController = require("./Controllers/commentsController");
+const notificationsController = require('./Controllers/notificationsController')
+const express = require("express");
+const app = express();
+const massive = require("massive");
+const breweryDB = require("brewerydb-node");
+const session = require("express-session");
+const axios = require("axios");
+
+
+
 const {
   API_KEY,
   PORT,

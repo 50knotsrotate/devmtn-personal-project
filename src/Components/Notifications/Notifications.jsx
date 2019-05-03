@@ -71,7 +71,7 @@ class Notifications extends Component {
         )}
 
         {this.state.showModal && (
-          <StripeProvider apiKey="pk_test_fSKwetzBIOPjCUhTS1YnVoQ500UlcmHWzD">
+          <StripeProvider apiKey="My Key">
             <Elements>
               <CheckoutForm />
             </Elements>
