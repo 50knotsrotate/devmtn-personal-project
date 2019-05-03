@@ -5,7 +5,7 @@ import Notifications from '../Notifications/Notifications'
 
 export default (
     <Switch>
-        <Route exact path='/notifications' component={Notifications} />
         <Route path='/users/:username/comments' component={Comments} />
+        <Route path='/notifications' component={Notifications} />
     </Switch>
 )

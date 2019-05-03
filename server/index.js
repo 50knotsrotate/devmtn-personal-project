@@ -6,8 +6,9 @@ const {
   PORT,
   CONNECTION_STRING,
   SESSION_SECRET,
-  TWILIO_SID,
+  SANDBOX_API,
   STRIPE_KEY,
+  TWILIO_SID,
   TWILIO_AUTH_TOKEN,
   STRIPE_SK_TEST
 } = process.env;
@@ -18,8 +19,6 @@ const twilioController = require("./Controllers/twilioController");
 const storeController = require('./Controllers/storeController')
 const authController = require("./Controllers/authController");
 const beerController = require('./Controllers/beerController')
-
-
 
 //Middleware
 const authMiddleware = require("./middleware/authMiddleware");
@@ -45,9 +44,6 @@ const massive = require("massive");
 const session = require("express-session");
 const stripe = require("stripe")(STRIPE_SK_TEST);
 const client = require("twilio")(TWILIO_SID, TWILIO_AUTH_TOKEN);
-const brewDB = require('brewerydb-node');
-const brewdb = new brewDB(API_KEY);
-const axios = require('axios');
 
 //Top level middleware
 app.use(express.json())
@@ -71,23 +67,12 @@ massive(CONNECTION_STRING)
 
 //Auth endpoints
 app.post("/signup", ...signUpMiddleware);
-app.post("/signin", authController.sign_in);
+app.get("/signin", authController.sign_in);
 app.delete("/logout", authController.logout);
 app.put("/user", authController.updateToPremium);
 
 //Used exclusively by redux for keeping up with changes on the backend.
 app.get("/session", authController.getSession);
-
-app.post('/brewtest', (req, res) => {
-  console.log(req.body)
-  const { id } = req.body
-  axios.get(`https://api.brewerydb.com/v2/brewery/${id}/locations&?key=${API_KEY}`)
-    .then(response => { 
-      res.status(200).send(response)
-    }).catch(err => { 
-      res.status(500).send(err.request.response)
-    })
-})
 
 //Comment endpoints
 app.get("/comments/:id", commentsController.getComments);

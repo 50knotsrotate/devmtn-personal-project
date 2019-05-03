@@ -19,7 +19,7 @@
 .broobroo {
     width: 80vw;
     background-color: rgba(0,0,0,.5);
-    /* max-height: 1000px; */
+    max-height: 1000px;
     overflow-x: hidden;
     display: flex;
     justify-content: space-around;
@@ -52,8 +52,8 @@
 .comments {
     /* background-color: rgba(100, 0, 0, .5); */
     width: 90%;
-    /* min-width: 430px;
-    max-width: 900px; */
+    min-width: 430px;
+    max-width: 900px;
     margin: 0 auto;
     /* min-width: 450px; */
    /* margin: 0 auto;

@@ -75,27 +75,23 @@ class SignUp extends Component {
     const form = (
       <div className="sign-up">
         <div className="sign-up-form">
+          <h1>Belch</h1>
           <div className="form">
-            <h2>Sign Up for Belche</h2>
-            <div>
-              <h2>Username</h2>
-              <input
-                type="text"
-                value={this.state.username}
-                onChange={e => this.handleUsernameInput(e.target.value)}
-                className="input-field"
-              />
-            </div>
-            <div>
-              <h2>Password</h2>
-              <input
-                type=""
-                onChange={e => this.handlePasswordInput(e.target.value)}
-                value={this.state.password}
-                placeholder="Password"
-                className="input-field"
-              />
-            </div>
+            <input
+              type="text"
+              value={this.state.username}
+              onChange={e => this.handleUsernameInput(e.target.value)}
+              placeholder="Choose username"
+              className="input-field"
+            />
+            <br />
+            <input
+              type="text"
+              onChange={e => this.handlePasswordInput(e.target.value)}
+              value={this.state.password}
+              placeholder="Password"
+              className="input-field"
+            />
             <h4>I would like to recive text notifications</h4>
             <input type="checkbox" onChange={e => this.toggleText(e)} />
             {this.state.textNotifications && (
@@ -107,23 +103,23 @@ class SignUp extends Component {
                 value={this.state.number}
               />
             )}
-              <button
-                className="sign-up-button"
-                onClick={() =>
-                  this.signUp(
-                    this.state.username,
-                    this.state.password,
-                    this.state.textNotifications,
-                    this.state.number
-                  )
-                }
-              >
-              <Link to="/home"><span>Sign Up</span></Link>
-              </button>
-            <Link to="/">
-              <h3>Already have an account?</h3>
-            </Link>
           </div>
+          <button
+            className="sign-up-button"
+            onClick={() =>
+              this.signUp(
+                this.state.username,
+                this.state.password,
+                this.state.textNotifications,
+                this.state.number
+              )
+            }
+          >
+            <Link to="/home">Sign Up</Link>
+          </button>
+          <Link to="/">
+            <h2>Already have an account?</h2>
+          </Link>
         </div>
       </div>
     );

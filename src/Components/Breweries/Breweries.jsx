@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import BreweryTitle from "../BreweryTitle/BreweryTitle";
 import axios from "axios";
-import LoadingModal from '../LoadingModal/LoadingModal'
 import { Link } from 'react-router-dom'
 
 
@@ -56,7 +55,7 @@ export default class Breweries extends Component {
           );
       })
     ) : (
-      <LoadingModal url = 'https://static1.fjcdn.com/thumbnails/comments/Well+if+you+open+the+gif+with+a+white+background+_b8332784f0e4a278cf2e77c4766d9911.gif' />
+      <h2>Loading LOADING AHHH</h2> //Defintetly gotta stop putting off making the loading modal...
     );
   }
 }

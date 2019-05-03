@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Item from "../Items/Item";
 import StoreModal from "../StoreModal/StoreModal";
-import LoadingModal from '../../Components/LoadingModal/LoadingModal'
 import axios from "axios";
 
 import "./Store.css";
@@ -72,7 +71,7 @@ class Store extends Component {
         })}
       </div>
     ) : (
-      <LoadingModal url="https://quickfever.com/wp-content/uploads/2019/01/bird-gif.gif" />
+      <h1>Loading your storeeeee</h1>
     );
   }
 }
