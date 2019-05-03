@@ -111,9 +111,8 @@ app.get("/store", storeController.getStore);
 app.post("/charge", authController.purchasePremium);
 
 
-app.listen(PORT, () => { console.log(`Listening on ${PORT}`) });
+app.listen(PORT || 4000, () => { console.log(`Listening on ${PORT}`) });
 
 module.exports.client = client;
 module.exports.API_KEY = API_KEY;
 module.exports.stripe = stripe
-

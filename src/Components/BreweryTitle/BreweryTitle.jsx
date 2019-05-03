@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Brewery.css";
-
+//I have a stateful component which does not do anything. 
+//Lets make this a func-y boi
 export default class Brewery extends Component {
   constructor(props) {
     super(props);

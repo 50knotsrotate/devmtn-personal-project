@@ -31,8 +31,6 @@ export default class Home extends Component {
     return (
       <span>
         <NavBar
-          backHome={this.toggleShow}
-          user={this.props.user}
           showModal={this.state.showModal}
           toggleModal={this.showModal}
         />
