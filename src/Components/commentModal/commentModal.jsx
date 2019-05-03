@@ -28,7 +28,7 @@ export default class CommentModal extends Component {
   render() {
     return (
       <div className="comment-modal">
-        <h1>Write a review. Now.</h1>
+        <h1>Write a review.</h1>
         <Stars onRate={this.onRate} />
         <textarea
           className="comment-text"

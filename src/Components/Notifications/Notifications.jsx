@@ -29,6 +29,8 @@ class Notifications extends Component {
   componentWillUnmount() {
     Axios.put("/notifications")
       .then(res => {
+
+
         //This takes all notifications that belong to the user which are NEW(unread), and puts them into OLD.
         //This way, notifications only show up in NEW when they have not been seen yet.
         // See server / controllers / notificationsController
@@ -57,7 +59,7 @@ class Notifications extends Component {
     });
   };
   render() {
-    //We will need routes to toggle between comments and notifications
+    const { REACT_APP_STRIPE_KEY }= process.env
     return (
       <div>
         {!this.props.user.is_premium_user && (
@@ -73,7 +75,7 @@ class Notifications extends Component {
         )}
 
         {this.state.showModal && (
-          <StripeProvider apiKey="My Key">
+          <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
             <Elements>
               <CheckoutForm />
             </Elements>

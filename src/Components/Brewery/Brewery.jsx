@@ -5,6 +5,7 @@ import "./BreweryPage.css";
 import Modal from "../Modal/Modal";
 import Stars from "../Stars/Stars";
 import CommentModal from "../commentModal/commentModal";
+import LoadingModal from '../LoadingModal/LoadingModal'
 
 export default class Brewery extends Component {
   constructor(props) {
@@ -150,7 +151,7 @@ export default class Brewery extends Component {
             </div>
           )}
 
-          {this.state.data && <div className="broobroo">{beers}</div>}
+          {this.state.data ? <div className="broobroo">{beers}</div> : <LoadingModal />}
         </div>
         {this.state.showReviews ? (
           <div className="comments">
@@ -168,9 +169,8 @@ export default class Brewery extends Component {
               />
             )}
           </div>
-        ) : (
-          <div className="business-info" />
-        )}
+        ) : null
+        }
       </span>
     );
   }
