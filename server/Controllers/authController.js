@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const stripe = require('../index');
+const stripe  = require('../index');
 const saltRounds = 10;
 
 module.exports = {
@@ -39,11 +39,7 @@ module.exports = {
   sign_in: async (req, res) => {
     const db = req.app.get("db");
     const { username, password } = req.body;
-    console.log('username below')
-    console.log(username)
     const user = await db.find_user([username]);
-    console.log('user below')
-    console.log(user)
     if (user.length) {
       bcrypt.compare(password, user[0].password).then(result => {
         if (result) {
@@ -114,7 +110,9 @@ module.exports = {
         source: req.body.token.id
       })
       .then(response => {
-        res.status(200).send(response);
-      });
+        res.sendStatus(200)
+      }).catch(err => { 
+        res.sendStatus(404)
+      })
   }
 };

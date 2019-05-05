@@ -39,10 +39,6 @@ create table notifications (
     is_new integer
 );
 
-
-
-
-
 insert into users(username, password, premium_user, belch_points)
 values('admin', 'admin', 'yes', 10000);
 
@@ -50,10 +46,10 @@ insert into comments(user_id, brewery_id, content, rating, upvotes)
 values(1,'ZaaAPU', 'this plase rools', 5, 1),
 (1,'ZaaAPU', 'this plase rox my six', 4, 1),
 (1,'ZaaAPU', 'this plase is dowpe', 4, 1),
-(1,'ZaaAPU', 'this plase rox my six', 4, 1),
+(1,'ZaaAPU', 'Amazing. 5/5 is not enough for this place. I would give it a 10/10 , heck even a 100/100 if I could', 4, 1),
 (1,'ZaaAPU', 'their beer is litereally just seltzer with food coloring... 3 stars.', 3, 1),
-(1,'ZaaAPU', 'BEER!!', 5, 1),
-(1,'ZaaAPU', 'My girlfriend broke up with me 0 stars', 1, 0);
+(1,'ZaaAPU', 'Amazing staff, GREAT beer, amazing time. Street parking wasnt that great though, 1 star.', 1, 1),
+(1,'ZaaAPU', 'My girlfriend broke up with me 1 star', 0, 0);
 
 insert into store (name, description, price, image, handler)
 values('Suddenly: Chuck', 'Blow up your friends (or foes) phones with Chuck Norris jokes. Issues 5 jokes.', 10, 'https:

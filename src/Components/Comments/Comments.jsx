@@ -2,17 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Comments(props) { 
-  //This component needs to go into Brewery and Notifications once its done.
-    return (
+  return (
       <div>
-        <h1>Comments</h1>
-        <h1>Comments</h1>
-        <h1>Comments</h1>
-        <h1>Comments</h1>
-        <h1>Comments</h1>
-        <h1>Comments</h1>
-        <h1>Comments</h1>
-        <h1>Comments</h1>
+      {props.comments.map(comment => { 
+        return(
+          <h1>{comment.content}</h1>
+        )
+      }) }
       </div>
     );
 }

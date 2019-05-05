@@ -95,6 +95,12 @@ app.post("/comments/:id", commentsController.addComment);
 app.put("/comments/:id", commentsController.editComment);
 app.delete("/comments/:id", commentsController.deleteComment);
 
+//Get all comments for a user
+//Should maybe change these endpoints to 
+//reflect the database
+//all well
+app.get('/user/comments', commentsController.getUserComments)
+
 //Notification endpoints
 app.put("/notifications", notificationsController.updateNotifications);
 app.get("/notifications", notificationsController.getNotifications);

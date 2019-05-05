@@ -35,6 +35,16 @@ module.exports = {
   },
   deleteComment: (req, res) => { 
     console.log(req.body)
+  },
+  getUserComments: (req, res) => { 
+    const db = req.app.get('db');
+    db.get_user_comments(req.session.user.id)
+      .then(result => { 
+        console.log(result)
+        res.status(200).send(result)
+      }).catch(err => { 
+        res.status(404).send(err)
+      })
   }
 
 };

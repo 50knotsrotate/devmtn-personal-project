@@ -1,0 +1,1 @@
+select * from comments where user_id = $1;

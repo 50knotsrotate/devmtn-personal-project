@@ -4,6 +4,7 @@ import { Elements, StripeProvider } from "react-stripe-elements";
 import { getSession } from "../../ducks/sessionReducer";
 import { connect } from "react-redux";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
+import Comments from '../Comments/Comments';
 import "./Notifications.css";
 
 class Notifications extends Component {
@@ -11,7 +12,7 @@ class Notifications extends Component {
     super(props);
     this.state = {
       notifications:null,
-      myComments: null,
+      myComments: [],
       showModal: false
     };
   }
@@ -19,9 +20,15 @@ class Notifications extends Component {
     Axios.get("/notifications").then(res => {
       Axios.get("/session").then(session => {
         this.props.getSession(session.data); 
-        this.setState({
-          notifications: res.data.filter(notif => notif.is_new)
-        });
+        Axios.get(`/user/comments`)
+          .then(comments => { 
+            console.log(comments.data)
+            this.setState({
+              notifications: res.data.filter(notif => notif.is_new),
+              myComments: comments.data
+            });
+
+          })
       });
     });
   }
@@ -47,10 +54,6 @@ class Notifications extends Component {
     });
   };
 
-  getComments = () => {
-    //Once I get the comments component finished, this will be used to get all the comments belonging to the current user.
-  };
-
   getNewNotifications = () => {
     this.setState({
       notifications: this.state.notifications.filter(
@@ -59,6 +62,7 @@ class Notifications extends Component {
     });
   };
   render() {
+    console.log(this.state.myComments)
     const { REACT_APP_STRIPE_KEY }= process.env
     return (
       <div>
@@ -81,8 +85,6 @@ class Notifications extends Component {
             </Elements>
           </StripeProvider>
         )}
-        <button onClick={this.getComments}>My Comments</button>
-        <button onClick={this.getNewNotifications}>New</button>
         <div className="notifications">
           {this.state.notifications
             ? this.state.notifications.map(notif => {
@@ -93,6 +95,9 @@ class Notifications extends Component {
                 );
               })
             : null}
+          <Comments
+            comments={this.state.myComments}
+          />
         </div>
       </div>
     );
