@@ -7,6 +7,10 @@
     background-position: center;
 }
 
+.home {
+    background-color: green;
+}
+
 .home-brewery-container { 
     /* this is container all brewery info */
     height: 85%;
@@ -30,6 +34,8 @@
     background-color: black;
     border-radius: 10px;
 }
+
+
 
 
 .hide {

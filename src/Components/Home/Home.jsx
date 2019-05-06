@@ -29,7 +29,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <span>
+      <span className = 'home'>
         <NavBar
           showModal={this.state.showModal}
           toggleModal={this.showModal}

@@ -1,3 +1,5 @@
+const client = require("../index");
+
 module.exports = {
   getComments: async (req, res) => {
     const db = req.app.get("db");
@@ -31,7 +33,35 @@ module.exports = {
       });
   },
   editComment: (req, res) => { 
-    console.log(req.body)
+    const { id } = req.params
+    const { brewery_id, user } = req.query
+    const db = req.app.get('db');
+    db.add_upvote([id, brewery_id])
+      .then(response => { 
+        res.status(200).send(response)
+        db.find_user_by_id(user)
+          .then(user => { 
+            const foundUser = user[0];
+            console.log(foundUser)
+            if (foundUser.text_notifications) { 
+                client.client.messages
+                  .create({
+                    body: `${req.session.user.username} has upvoted your comment!`,
+                    from: "+12183668652",
+                    to: `+1${foundUser.phone_number}`
+                  })
+                  .then(message => {
+                    console.log('message sent')
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  });
+            }
+
+          })
+
+        
+      })
   },
   deleteComment: (req, res) => { 
     console.log(req.body)

@@ -22,10 +22,10 @@ class Notifications extends Component {
         this.props.getSession(session.data); 
         Axios.get(`/user/comments`)
           .then(comments => { 
-            console.log(comments.data)
             this.setState({
               notifications: res.data.filter(notif => notif.is_new),
               myComments: comments.data
+              //need to make it so new comments are filtered out in willMount, not in unMount.
             });
 
           })
@@ -62,10 +62,9 @@ class Notifications extends Component {
     });
   };
   render() {
-    console.log(this.state.myComments)
     const { REACT_APP_STRIPE_KEY }= process.env
     return (
-      <div>
+      <div className="wrapper">
         {!this.props.user.is_premium_user && (
           <div className="premium-notification">
             <h3>
@@ -78,6 +77,33 @@ class Notifications extends Component {
           </div>
         )}
 
+        {/* {this.state.showModal && (
+          <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
+            <Elements>
+              <CheckoutForm />
+            </Elements>
+          </StripeProvider>
+        )} */}
+        <div className="notifications">
+          <div className="notifs-container">
+            <h1>NOTIFICATIONS</h1>
+            {this.state.notifications && this.state.notifications.length ? (
+              this.state.notifications.map(notif => {
+                return (
+                  <div className="notification">
+                    <h2>{notif.content}</h2>
+                  </div>
+                );
+              })
+            ) : (
+              <h1>You have no new notifications</h1>
+            )}
+          </div>
+          <div className="your-comments">
+            <h1>YOUR COMMENTS</h1>
+            <Comments comments={this.state.myComments} />
+          </div>
+        </div>
         {this.state.showModal && (
           <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
             <Elements>
@@ -85,20 +111,6 @@ class Notifications extends Component {
             </Elements>
           </StripeProvider>
         )}
-        <div className="notifications">
-          {this.state.notifications
-            ? this.state.notifications.map(notif => {
-                return (
-                  <div className="notification">
-                    <h2>{notif.content}</h2>
-                  </div>
-                );
-              })
-            : null}
-          <Comments
-            comments={this.state.myComments}
-          />
-        </div>
       </div>
     );
   }
