@@ -9,7 +9,9 @@
     border-radius: 10px;
     text-align:center;
 }
-
+.comment-modal h1 {
+ color: black;
+}
 
 .comment-text {
     width: 90%;

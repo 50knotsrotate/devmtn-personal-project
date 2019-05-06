@@ -1,3 +1,4 @@
+
 .Brewery-info {
     background-image: url('https://wallpapercave.com/wp/8dsyKCf.jpg');
     height: 100%;
@@ -5,20 +6,21 @@
     background-position: center;
     color: white;
     font-family: monospace;
-    width: 100%;
+    width: 90%;
     text-align: center;
+    margin: 0 auto;
 }
 
 
+
 .header {
-    width: 100vw;
-  background-color: white;
-  color: black;
+    background-color: white;
+    color: black;
 }
 
 .broobroo {
     width: 80vw;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0, 0, 0, .5);
     /* max-height: 1000px; */
     overflow-x: hidden;
     display: flex;
@@ -41,7 +43,7 @@
     background-color: rgba(0, 0, 0, .5);
     margin-bottom: 10px;
     text-align: center;
-    border-radius: 10px;  
+    border-radius: 10px;
 }
 
 .beer-container:hover {
@@ -56,7 +58,7 @@
     max-width: 900px; */
     margin: 0 auto;
     /* min-width: 450px; */
-   /* margin: 0 auto;
+    /* margin: 0 auto;
    display: flex;
    flex-direction: column;
    height: 550px;
@@ -65,14 +67,20 @@
 
 .comment-top {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
+}
+
+.upvote {
+    display: flex;
+
 }
 
 .toggle-reviews {
     text-align: center;
 }
-      
+
 
 .toggle-reviews:hover {
     cursor: pointer;
@@ -98,7 +106,7 @@
     border: 3px solid blue;
 }
 
-.submit{
+.submit {
     background-color: lightgreen;
     color: green;
     /* padding: 15px; */
@@ -123,18 +131,18 @@
 
 .review {
     background-color: red;
-         animation-name: info;
-         animation-duration: 3s;
-         animation-iteration-count: 1;
-         animation-timing-function: linear;
+    animation-name: info;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
 }
 
-.info{
+.info {
     background-color: green;
-      animation-name: review;
-      animation-duration: 3s;
-      animation-iteration-count: 1;
-      animation-timing-function: linear;   
+    animation-name: review;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
 
 }
 
@@ -159,7 +167,5 @@
         height: 250px;
     }
 
-    .beer-container:hover {
-
-    }
+    .beer-container:hover {}
 }

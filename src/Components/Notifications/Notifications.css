@@ -1,22 +1,40 @@
 .notifications {
-    width: 50%;
-    height: 75vh;
+    width: 70%;
     margin: 0 auto;
-    /* overflow-y: scroll; */
-    border: 1px solid red;
     text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: SPACE-around;
 }
 
+h1 {
+    font-family: monospace;
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 92.3vh;
+     background:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+ url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3549919.jpg');
+    background-position: center;
+    background-size: cover;
+}
 .notification {
-    width: 90%;
-    border: 3px solid black;
+    width: 80%;
+    border: 3px solid whitesmoke;
     border-radius: 10px;
     margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
 }
 
 
 .premium-notification {
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(255,255,255,.5);
     text-align: center; 
     animation-name: pronotification;
     animation-duration: 3s;
@@ -56,5 +74,17 @@
         background-color: rgba(0,0,0,0.5);
     }
 
+}
+
+@media only screen and (max-width: 1200px) {
+    .notifications {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .your-comments {
+        width: 100%;
+    }
+ 
 }
 

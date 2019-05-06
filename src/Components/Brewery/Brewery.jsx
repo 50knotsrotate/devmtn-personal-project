@@ -5,7 +5,8 @@ import "./BreweryPage.css";
 import Modal from "../Modal/Modal";
 import Stars from "../Stars/Stars";
 import CommentModal from "../commentModal/commentModal";
-import LoadingModal from '../LoadingModal/LoadingModal'
+import LoadingModal from "../LoadingModal/LoadingModal";
+import beer from '../../assets/review.png'
 
 export default class Brewery extends Component {
   constructor(props) {
@@ -67,6 +68,21 @@ export default class Brewery extends Component {
     }
   };
 
+  onUpvote = (id, user_id) => { 
+    axios
+      .put(`/comments/${id}?brewery_id=${this.props.match.params.id}&user=${user_id}`)
+      .then(comments => {
+        const commentsCopy = [...this.state.reviews];
+        const updatedCommentIndex = this.state.reviews.findIndex(
+          comment => comment.id == id
+        );
+        commentsCopy[updatedCommentIndex] = comments.data[0];
+        this.setState({
+          reviews: commentsCopy
+        });
+      });
+  }
+
   toggleCommentModal = () => {
     this.setState({
       showCommentModal: !this.state.showCommentModal
@@ -124,12 +140,17 @@ export default class Brewery extends Component {
 
     const reviews = this.state.reviews ? (
       this.state.reviews.map(review => {
-        // comments component here
         return (
           <div className="reviews">
             <div className="comment-top">
-              <Stars rating={review.rating} />
-              <h4>{review.username}</h4>
+              <div>
+                <h4>{review.username}</h4>
+                <Stars rating={review.rating} />
+              </div>
+              <div className='upvote'>
+                <img src={beer} style={{ width: '20px', height: '20px' }} alt='beer' onClick={() => this.onUpvote(review.id, review.user_id)} />
+                <h4>{review.upvotes}</h4>
+                </div>
             </div>
             <hr />
             <p>{review.content}</p>
@@ -141,7 +162,7 @@ export default class Brewery extends Component {
     );
 
     return (
-      <span>
+      <span className = 'brewery-wrapper'>
         <div className="Brewery-info" onClick={this.removeModal}>
           {this.state.data && (
             <div className="header">
@@ -151,7 +172,11 @@ export default class Brewery extends Component {
             </div>
           )}
 
-          {this.state.data ? <div className="broobroo">{beers}</div> : <LoadingModal />}
+          {this.state.data ? (
+            <div className="broobroo">{beers}</div>
+          ) : (
+            <LoadingModal />
+          )}
         </div>
         {this.state.showReviews ? (
           <div className="comments">
@@ -169,8 +194,7 @@ export default class Brewery extends Component {
               />
             )}
           </div>
-        ) : null
-        }
+        ) : null}
       </span>
     );
   }
