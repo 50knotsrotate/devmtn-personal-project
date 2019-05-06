@@ -20,5 +20,14 @@ module.exports = {
     const db = req.app.get("db");
     const notifications = await db.get_notifications(id);
     res.status(200).send(notifications);
+  },
+  addNotification: (req, res, next) => {
+    const { user_id, username } = req.query; //this is the users id and username of the comment
+    // const { id } = req.params //this is the reviews id, we dont need this here
+    const db = req.app.get("db");
+    const message = `${req.session.user.username} has upvoted your comment!`;
+    db.create_notification([user_id, message, 1]).then(_ => {
+      next();
+    });
   }
 };

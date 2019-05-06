@@ -15,6 +15,7 @@ const {
 const notificationsController = require("./Controllers/notificationsController");
 const commentsController = require("./Controllers/commentsController");
 const twilioController = require("./Controllers/twilioController");
+const belchPointsController = require('./Controllers/belchPointsController');
 const storeController = require('./Controllers/storeController')
 const authController = require("./Controllers/authController");
 const beerController = require('./Controllers/beerController')
@@ -88,17 +89,13 @@ app.post('/brewtest', (req, res) => {
       res.status(500).send(err.request.response)
     })
 })
-
 //Comment endpoints
 app.get("/comments/:id", commentsController.getComments);
 app.post("/comments/:id", commentsController.addComment);
-app.put("/comments/:id", commentsController.editComment);
+app.put("/comments/:id", commentsController.editComment,notificationsController.addNotification, belchPointsController.updateBelchPoints); //This is for upvotes
 app.delete("/comments/:id", commentsController.deleteComment);
 
 //Get all comments for a user
-//Should maybe change these endpoints to 
-//reflect the database
-//all well
 app.get('/user/comments', commentsController.getUserComments)
 
 //Notification endpoints

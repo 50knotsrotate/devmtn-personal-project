@@ -68,9 +68,9 @@ export default class Brewery extends Component {
     }
   };
 
-  onUpvote = (id, user_id) => { 
+  onUpvote = (id, user_id, username) => { 
     axios
-      .put(`/comments/${id}?brewery_id=${this.props.match.params.id}&user=${user_id}`)
+      .put(`/comments/${id}?brewery_id=${this.props.match.params.id}&user_id=${user_id}&username=${username}`)
       .then(comments => {
         const commentsCopy = [...this.state.reviews];
         const updatedCommentIndex = this.state.reviews.findIndex(
@@ -80,7 +80,9 @@ export default class Brewery extends Component {
         this.setState({
           reviews: commentsCopy
         });
-      });
+      }).catch(error => { 
+        alert(error.request.response)
+      })
   }
 
   toggleCommentModal = () => {
@@ -148,7 +150,7 @@ export default class Brewery extends Component {
                 <Stars rating={review.rating} />
               </div>
               <div className='upvote'>
-                <img src={beer} style={{ width: '20px', height: '20px' }} alt='beer' onClick={() => this.onUpvote(review.id, review.user_id)} />
+                <img src={beer} style={{ width: '20px', height: '20px' }} alt='beer' onClick={() => this.onUpvote(review.id, review.user_id, review.username)} />
                 <h4>{review.upvotes}</h4>
                 </div>
             </div>
