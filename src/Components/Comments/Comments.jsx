@@ -7,13 +7,13 @@ import './Comments.css' //you need to combine these into one css file
 export default function Comments(props) { 
   return (
       <div>
-      {props.comments.map(review => { 
+      {props.comments.map((review, i) => { 
         return (
-          <div className="comment-container">
+          <div className="comment-container" key={i}>
             <div className="comment-top">
               <div>
                 <h4>{review.username}</h4>
-                <Stars rating={review.rating} />
+                <Stars rating={review.rating}/>
               </div>
               <div className="upvote">
                 <img

@@ -8,7 +8,7 @@ export default function Star(props) {
       <img src={review} className='star' alt='beer' onMouseOver={props.hover} onClick={props.submit} />
     ) : (  <div
       className={"nostar"}
-      onMouseOver={props.hover}
+      onMouseOver={ props.shouldReact ? props.hover : null}
       onClick={props.submit}
     />)
   );

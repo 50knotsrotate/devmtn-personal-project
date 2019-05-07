@@ -8,9 +8,7 @@ export default class Stars extends Component {
 
     this.state = {
       num: 0,
-
       submitted: false,
-
       starCount: 6
     };
   }
@@ -41,13 +39,14 @@ export default class Stars extends Component {
   render() {
     const stars = [];
 
-    for (let i = 0; i < this.state.starCount - 1; i++) {
+    for (let i = 0; i < this.state.starCount-1; i++) {
       stars.push(
         <Star
           isLit={
             this.props.rating ? i <= this.props.rating : this.state.num >= i
           }
           hover={() => this.hover(i)}
+          shouldReact={ this.props.rating + 1 ? 0 : 1}
           key={i}
           toggleSubmitted={this.submitRating}
           submit={

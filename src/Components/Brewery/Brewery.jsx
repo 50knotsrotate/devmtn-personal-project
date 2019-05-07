@@ -74,7 +74,7 @@ export default class Brewery extends Component {
       .then(comments => {
         const commentsCopy = [...this.state.reviews];
         const updatedCommentIndex = this.state.reviews.findIndex(
-          comment => comment.id == id
+          comment => comment.id === id //If there is a problem, change this to two equals
         );
         commentsCopy[updatedCommentIndex] = comments.data[0];
         this.setState({
@@ -111,6 +111,7 @@ export default class Brewery extends Component {
       this.state.data.map((beer, i) => {
         return (
           <div
+            key={i}
             className="beer-container"
             onClick={() =>
               this.showDescription(
@@ -141,13 +142,13 @@ export default class Brewery extends Component {
     );
 
     const reviews = this.state.reviews ? (
-      this.state.reviews.map(review => {
+      this.state.reviews.map((review, i) => {
         return (
-          <div className="reviews">
+          <div className="reviews" key={i}>
             <div className="comment-top">
               <div>
                 <h4>{review.username}</h4>
-                <Stars rating={review.rating} />
+                <Stars rating={review.rating}  />
               </div>
               <div className='upvote'>
                 <img src={beer} style={{ width: '20px', height: '20px' }} alt='beer' onClick={() => this.onUpvote(review.id, review.user_id, review.username)} />

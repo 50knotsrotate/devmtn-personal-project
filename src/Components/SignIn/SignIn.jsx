@@ -60,7 +60,7 @@ class SignIn extends Component {
             <div>
               <h2>Password</h2>
               <input
-                type="text"
+                type="password"
                 onChange={e => this.handlePasswordInput(e.target.value)}
                 placeholder="Password"
                 className="input-field"

@@ -59,32 +59,13 @@ class Notifications extends Component {
     // const { REACT_APP_STRIPE_KEY }= process.env
     return (
       <div className="wrapper">
-        {/* {!this.props.user.is_premium_user && (
-          <div className="premium-notification">
-            <h5>
-              Note: Since you are not a premium user, you cannot claim your
-              belch points. Don't worry - you can get them by{" "}
-              <span className="pro-signup" onClick={this.toggleModal}>
-                signing up for pro
-              </span>
-            </h5>
-          </div>
-        )} */}
-
-        {/* {this.state.showModal && (
-          <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
-            <Elements>
-              <CheckoutForm />
-            </Elements>
-          </StripeProvider>
-        )} */}
         <div className="notifications">
           <div className="notifs-container">
             <h1>NOTIFICATIONS</h1>
             {this.state.notifications && this.state.notifications.length ? (
-              this.state.notifications.map(notif => {
+              this.state.notifications.map((notif, i) => {
                 return (
-                  <div className="notification">
+                  <div className="notification" key={i}>
                     <h2>{notif.content}</h2>
                   </div>
                 );
@@ -98,13 +79,6 @@ class Notifications extends Component {
             <Comments comments={this.state.myComments} />
           </div>
         </div>
-        {/* {this.state.showModal && (
-          <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
-            <Elements>
-              <CheckoutForm />
-            </Elements>
-          </StripeProvider>
-        )} */}
       </div>
     );
   }
