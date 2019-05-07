@@ -14,7 +14,7 @@ module.exports = {
 
   sendChuck: (req, res, next) => {
     const { number } = req.body;
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 5; i++) {
       axios.get("https://api.chucknorris.io/jokes/random").then(joke => {
         client.client.messages
           .create({
