@@ -90,7 +90,7 @@ class SignUp extends Component {
             <div>
               <h2>Password</h2>
               <input
-                type=""
+                type="password"
                 onChange={e => this.handlePasswordInput(e.target.value)}
                 value={this.state.password}
                 placeholder="Password"

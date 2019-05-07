@@ -96,23 +96,40 @@ module.exports = {
     const { id } = req.session.user;
 
     db.pro(id).then(response => {
-      req.session.user.is_premium_user = 1;
+      req.session.user.is_premium_user = 1; 
       res.status(200).send(response);
     });
   },
   purchasePremium: (req, res) => {
-    console.log(req.body)
+    const stripeToken = req.body.stripeToken
     stripe.stripe.charges
       .create({
         amount: 99,
         currency: "usd",
         description: "Thanks for joining us!",
-        source: req.body.token.id
-      })
-      .then(response => {
-        res.sendStatus(200)
-      }).catch(err => { 
-        res.sendStatus(404)
-      })
+        source: stripeToken
+      },
+        function (err, charge) { 
+          if (err) {
+            res.send({
+              success: false,
+              message: 'Error'
+            });
+
+          } else { 
+            const db = req.app.get('db');
+            const { id } = req.session.user
+            db.pro(id).then(_ => {
+              req.session.user.is_premium_user = 1
+              res.send({
+                success: true,
+                message: "Success"
+              });
+
+             })
+            
+          }
+        }
+      )
   }
 };

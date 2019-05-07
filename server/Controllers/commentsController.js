@@ -37,15 +37,17 @@ module.exports = {
     const { id } = req.params; //this is the comment id
     const { brewery_id, user_id, username } = req.query;
     const db = req.app.get("db");
+
     db.add_upvote([id, brewery_id]).then(response => {
-      res.status(200).send(response);
       db.find_user_by_id(user_id).then(user => {
         const foundUser = user[0];
-        console.log('edit comment comments controller found user')
-        console.log(foundUser)
         if (foundUser.id == req.session.user.id) {
           return res.status(500).send("You cannot upvote your own comment");
+        } else {
+          res.status(200).send(response);
         }
+        console.log("edit comment comments controller found user");
+        console.log(foundUser);
 
         if (foundUser.text_notifications) {
           client.client.messages

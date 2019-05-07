@@ -18,8 +18,10 @@ export default class CommentModal extends Component {
     });
   };
 
+
+
   onRate = rate => {
-    console.log(rate);
+
     this.setState({
       rating: rate
     });
@@ -29,7 +31,7 @@ export default class CommentModal extends Component {
     return (
       <div className="comment-modal">
         <h1>Write a review.</h1>
-        <Stars onRate={this.onRate} />
+        <Stars onRate={this.onRate}  />
         <textarea
           className="comment-text"
           value={this.state.text}
