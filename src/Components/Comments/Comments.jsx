@@ -20,9 +20,6 @@ export default function Comments(props) {
                   src={beer}
                   style={{ width: "20px", height: "20px" }}
                   alt="beer"
-                  onClick={() =>
-                    this.onUpvote(review.id, review.user_id)
-                  }
                 />
                 <h4>{review.upvotes}</h4>
               </div>

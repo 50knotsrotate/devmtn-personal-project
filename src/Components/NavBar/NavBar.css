@@ -1,5 +1,6 @@
 .nav-bar {
     width: 100%;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,9 +22,10 @@
     display: flex;
     align-items: center;
     list-style-type: none;
-    width: 30%;
+    width: 50%;
+    max-width: 600px;
     justify-content: space-between;
-      margin: 25px 15px;
+    margin: 25px 15px;
 }
 
 .nav-items a {
@@ -42,14 +44,13 @@
 }
 
 .nav-items a:hover {
-    border-bottom: 3px solid white;
+    /* border-bottom: 1px solid white; */
+    color: yellow;
+    transition: .25s;
 
 }
 
-@media only screen and (max-width: 900px) {
-    .nav-bar {
-        
-    }
+@media only screen and (max-width: 800px) {
     .nav-items {
         display: none;
     }

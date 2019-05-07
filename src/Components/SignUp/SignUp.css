@@ -21,7 +21,7 @@
 }
 
 .form {
-    height: 450px;
+    min-height: 450px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

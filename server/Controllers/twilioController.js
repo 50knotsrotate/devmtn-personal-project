@@ -8,7 +8,7 @@ module.exports = {
         from: "+12183668652",
       to: `+1${req.body.number}`
     }).then(message => {
-        console.log(message)
+        console.log(message.body)
     })
   },
 

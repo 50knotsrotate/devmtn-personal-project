@@ -23,7 +23,7 @@ module.exports = {
           req.session.user = {
             username: newUser[0].username,
             id,
-            is_premium_user: newUser[0].premium_user === "yes",
+            is_premium_user: 0,
             belch_points,
             text_notifications
           };
@@ -81,7 +81,7 @@ module.exports = {
         req.session.user = {
           username,
           id,
-          is_premium_user: premium_user == "true",
+          is_premium_user: premium_user,
           belch_points,
           text_notifications
         };

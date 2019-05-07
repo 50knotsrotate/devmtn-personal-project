@@ -12,7 +12,7 @@ export default function Modal(props) {
         </div>
       ) : (
         <div className="modal">
-          <h1>{props.name}</h1>
+            <h1 style={{color: 'black'}}>{props.name}</h1>
           <h3>{props.text}</h3>
         </div>
       )}

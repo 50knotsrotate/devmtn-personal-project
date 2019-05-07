@@ -1,6 +1,5 @@
 .store {
     /* border: 9px solid black ; */
-
     width: 100vw;
     overflow-x: hidden;
     height: 92vh;
@@ -14,6 +13,29 @@
     flex-direction: column;
     align-items: center;
 
+}
+
+.premium-notification {
+    background-color: rgba(255, 255, 255, .5);
+    text-align: center;
+    animation-name: pronotification;
+    animation-duration: 3s;
+    animation-delay: 0s;
+}
+
+.premium-notification h5 {
+    animation-name: pronotificationtext;
+    animation-duration: 5s;
+    animation-delay: 0;
+}
+
+.premium-notification h5:hover {
+    cursor: pointer;
+}
+
+.pro-signup {
+    color: blue;
+    text-decoration: underline;
 }
 
 .items {

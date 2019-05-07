@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Item from "../Items/Item";
 import StoreModal from "../StoreModal/StoreModal";
 import LoadingModal from '../../Components/LoadingModal/LoadingModal'
+import { Elements, StripeProvider } from "react-stripe-elements";
+import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import axios from "axios";
 
 import "./Store.css";
@@ -14,17 +16,19 @@ class Store extends Component {
     this.state = {
       items: null,
       showCheckOutModal: false,
-      modalType: null
+      modalType: null,
+      showPremiumModal: null
     };
   }
 
   componentDidMount() {
     axios.get("/session").then(user => {
       this.props.getSession(user.data);
-
+      console.log(this.props.user)
       axios.get("/store").then(items => {
         this.setState({
-          items: items.data
+          items: items.data,
+          showPremiumModal: !this.props.user.is_premium_user
         });
       });
     });
@@ -36,11 +40,17 @@ class Store extends Component {
     });
   };
 
+  togglePremiumModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
+
   submit = () => {
     axios.get("/session").then(user => {
       //For updating belch_points on page after a purchase was made
       // I made getSession in redux to keep the front end user props in sync with the back end.
-      this.props.getSession(user.data)
+      this.props.getSession(user.data);
       this.setState({
         showCheckOutModal: false,
         modalType: null
@@ -55,8 +65,23 @@ class Store extends Component {
     });
   };
   render() {
+    const { REACT_APP_STRIPE_KEY } = process.env;
     return this.state.items ? (
       <div className="store">
+        {this.props.is_premium_user && (
+          <div className="premium-notification">
+            <h5>
+              Note: Since you are not a premium user, you cannot claim your
+              belch points. Don't worry - you can get them by{" "}
+              <span
+                className="pro-signup"
+                onClick={this.togglePremiumModal}
+              >
+                signing up for pro
+              </span>
+            </h5>
+          </div>
+        )}
         <StoreModal
           type={this.state.modalType}
           show={this.state.showCheckOutModal}
@@ -70,6 +95,13 @@ class Store extends Component {
         {this.state.items.map(item => {
           return <Item item={item} task={this.taskDispatcher} />;
         })}
+        {this.state.showModal && (
+          <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
+            <Elements>
+              <CheckoutForm />
+            </Elements>
+          </StripeProvider>
+        )}
       </div>
     ) : (
       <LoadingModal url="https://quickfever.com/wp-content/uploads/2019/01/bird-gif.gif" />
