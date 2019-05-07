@@ -80,7 +80,6 @@ app.put("/user", authController.updateToPremium);
 app.get("/session", authController.getSession);
 
 app.post('/brewtest', (req, res) => {
-  console.log(req.body)
   const { id } = req.body
   axios.get(`https://api.brewerydb.com/v2/brewery/${id}/locations&?key=${API_KEY}`)
     .then(response => { 

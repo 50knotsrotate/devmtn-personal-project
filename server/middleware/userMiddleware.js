@@ -11,7 +11,6 @@ module.exports = {
     }
   },
   premiumUsersOnly: (req, res, next) => {
-    console.log(req.session.user)
     if (req.session.user.is_premium_user) {
       next();
     } else {

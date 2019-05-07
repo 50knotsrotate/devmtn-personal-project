@@ -29,7 +29,7 @@ module.exports = {
         });
       })
       .catch(err => {
-        console.log(err);
+        res.sendStatus(500)
       });
   },
   editComment: (req, res, next) => {
@@ -46,8 +46,6 @@ module.exports = {
         } else {
           res.status(200).send(response);
         }
-        console.log("edit comment comments controller found user");
-        console.log(foundUser);
 
         if (foundUser.text_notifications) {
           client.client.messages
@@ -60,14 +58,22 @@ module.exports = {
               next();
             })
             .catch(err => {
-              console.log(err);
+              return res.status(500).send('Something went wrong :/')
             });
         }
       });
     });
   },
   deleteComment: (req, res) => {
-    console.log(req.body);
+    const { id } = req.params; //this is the id of the review being deleted
+    const user_id = req.session.user.id;
+
+    const db = req.app.get('db');
+    db.remove_comment([id, user_id]).then(response => { 
+      res.status(200).send(response)
+    }).catch(err => { 
+      res.sendStatus(500)
+    })
   },
   getUserComments: (req, res) => {
     const db = req.app.get("db");

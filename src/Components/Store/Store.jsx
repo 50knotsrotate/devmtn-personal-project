@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Item from "../Items/Item";
 import StoreModal from "../StoreModal/StoreModal";
-import LoadingModal from '../../Components/LoadingModal/LoadingModal'
-import StripeCheckout from 'react-stripe-checkout';
+import LoadingModal from "../../Components/LoadingModal/LoadingModal";
+import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
 import "./Store.css";
@@ -44,19 +44,22 @@ class Store extends Component {
     });
   };
 
-  onToken = token => { 
-    axios.post('/charge', {
-      stripeToken: token.id
-    }).then(response => { 
-      this.setState({
-        showPremiumModal: false,
-        showModal: false
+  onToken = token => {
+    axios
+      .post("/charge", {
+        stripeToken: token.id
       })
-      alert('You have subscribed to pro, go you!')
-    }).catch(err => { 
-      alert('Oh no, something went wrong.')
-    })
-  }
+      .then(response => {
+        this.setState({
+          showPremiumModal: false,
+          showModal: false
+        });
+        alert("You have subscribed to pro, go you!");
+      })
+      .catch(err => {
+        alert("Oh no, something went wrong.");
+      });
+  };
 
   submit = () => {
     axios.get("/session").then(user => {
@@ -85,10 +88,7 @@ class Store extends Component {
             <h5>
               Note: Since you are not a premium user, you cannot claim your
               belch points. Don't worry - you can get them by{" "}
-              <span
-                className="pro-signup"
-                onClick={this.togglePremiumModal}
-              >
+              <span className="pro-signup" onClick={this.togglePremiumModal}>
                 signing up for pro
               </span>
             </h5>
@@ -112,7 +112,6 @@ class Store extends Component {
             token={this.onToken}
             stripeKey={REACT_APP_STRIPE_KEY}
           />
-      
         )}
       </div>
     ) : (

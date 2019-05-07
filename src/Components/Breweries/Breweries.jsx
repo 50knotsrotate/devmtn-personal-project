@@ -33,7 +33,7 @@ export default class Breweries extends Component {
           });
         })
         .catch(err => {
-          console.log(err);
+          alert(err.request.reponse)
         });
     });
   }
