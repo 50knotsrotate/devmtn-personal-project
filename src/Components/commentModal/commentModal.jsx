@@ -40,7 +40,7 @@ export default class CommentModal extends Component {
           className="comment-submit"
           onClick={() => this.props.post(this.state.text, this.state.rating)}
         >
-          Submit Review
+          Submit
         </button>
       </div>
     );

@@ -10,7 +10,7 @@ export default function Item(props) {
           <h3>{props.item.description}</h3>
           <h3>Price: {props.item.price} belch points</h3>
             </div>
-            <button className='purchase' onClick={() => props.task(props.item.handler)}>Buy this</button>
+            <button className='purchase' onClick={() => props.task(props.item.handler)}>Purchase</button>
       </span>
     );
 }

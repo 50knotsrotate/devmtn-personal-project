@@ -77,6 +77,7 @@ class SignUp extends Component {
         <div className="sign-up-form">
           <div className="form">
             <h2>Sign Up for Belche</h2>
+            <p>Note: The api is incomplete and will not fetch data for some breweries</p>
             <div>
               <h2>Username</h2>
               <input
@@ -121,7 +122,7 @@ class SignUp extends Component {
               <Link to="/home"><span>Sign Up</span></Link>
               </button>
             <Link to="/">
-              <h3>Already have an account?</h3>
+              <h3 style={{color:'white', textDecoration: 'underline'}} >Already have an account?</h3>
             </Link>
           </div>
         </div>

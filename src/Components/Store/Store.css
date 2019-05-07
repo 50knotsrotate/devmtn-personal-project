@@ -1,12 +1,21 @@
 .store {
-    border: 9px solid black ;
+    /* border: 9px solid black ; */
+
+    width: 100vw;
+    overflow-x: hidden;
+    height: 92vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+        url('https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/74802/910/606/m2/fpnw/wm1/beer-background-.jpg?1392368406&s=531e79c9559f98b5e5bba1669b6fe89e');
+    background-position: center;
+    background-size: cover;
     display: flex;
+    /* border: 8px solid green; */
+    margin: 0 auto;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+
 }
 
 .items {
     margin-top: 50px;
 }
-

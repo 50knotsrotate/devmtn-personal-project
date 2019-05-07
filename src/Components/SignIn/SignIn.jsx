@@ -71,7 +71,7 @@ class SignIn extends Component {
               <Link to="/home">Sign In</Link>
             </button>
             <Link to="/signUp">
-              <h3>Need to make an account?</h3>
+              <h3 style={{color:'white', textDecoration: 'underline'}}>Need to make an account?</h3>
             </Link>
           </div>
         </div>

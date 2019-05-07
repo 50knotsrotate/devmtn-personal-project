@@ -1,13 +1,15 @@
 .comment-modal {
-    width: 350px;
-    height: 300px;
+    width: 60vw;
+    height: 310px;
     position: fixed;
     top: calc(50vh - 200px);
-    right: calc(50vw - 185px);
-    background-color: white;
+    right: calc(20vw);
+    background-color: rgba(255,255,255,.9);
     border: 1px solid black;
     border-radius: 10px;
     text-align:center;
+    max-width: 1000px;
+    min-height: 100px;
 }
 .comment-modal h1 {
  color: black;
@@ -15,13 +17,16 @@
 
 .comment-text {
     width: 90%;
-    height: 195px;
+    height: 60%;
 }
 
 .comment-submit {
-    width: 100%;
+    width: 90%;
     margin-top: 5px;
     font-size: 1.5em;
     background-color: green;
     border: green;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
 }

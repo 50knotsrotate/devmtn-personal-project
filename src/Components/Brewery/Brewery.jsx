@@ -164,7 +164,7 @@ export default class Brewery extends Component {
     );
 
     return (
-      <span className = 'brewery-wrapper'>
+      <div className = 'brewery-wrapper'>
         <div className="Brewery-info" onClick={this.removeModal}>
           {this.state.data && (
             <div className="header">
@@ -197,7 +197,7 @@ export default class Brewery extends Component {
             )}
           </div>
         ) : null}
-      </span>
+      </div>
     );
   }
 }

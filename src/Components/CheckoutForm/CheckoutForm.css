@@ -1,13 +1,13 @@
 .checkout {
-        width: 450px;
-        height: 300px;
+        width: 320px;
+        height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     font-size: 2em;
-    top: calc(100vh + 300px);
-    left: 100px;
+    position: fixed;
+    top: calc(50vh - 160px);
+    left: calc(50vw - 160px);
     background-color: skyblue;
     border-radius: 10px;
-    z-index: 2;
 }

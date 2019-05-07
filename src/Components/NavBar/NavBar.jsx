@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 export function NavBar(props) {
   return (
     <div className="nav-bar">
-      <NavModal toggle={props.toggleModal} show={props.showModal} />
+      <NavModal toggle={props.toggleModal} show={props.showModal} logout={props.destroySession} />
       <h1>Belch</h1>
       <div className="nav-items">
         <Link to = '/home'>Home</Link>

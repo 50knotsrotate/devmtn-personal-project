@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import './StoreModal.css'
 
 export default class StoreModal extends Component {
   constructor(props) {

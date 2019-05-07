@@ -40,8 +40,8 @@ export default class Breweries extends Component {
   render() {
     return this.state.breweries ? (
       this.state.breweries.map((brew, i) => { //This is a perfect candidate for a stateless component.
-          return (
-              <Link to={`/breweries/${brew.id}`}>
+        return (
+            <Link to={`/breweries/${brew.id}`}>
               <BreweryTitle
                 distance={brew.distance}
                 description={brew.brewery.description}
@@ -53,7 +53,7 @@ export default class Breweries extends Component {
                 id={brew.id}
               />
             </Link>
-          );
+        );
       })
     ) : (
       <LoadingModal url = 'https://static1.fjcdn.com/thumbnails/comments/Well+if+you+open+the+gif+with+a+white+background+_b8332784f0e4a278cf2e77c4766d9911.gif' />

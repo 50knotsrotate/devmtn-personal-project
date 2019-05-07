@@ -14,6 +14,9 @@ export default function NavModal(props) {
       <h1>
         <Link to="/store">Store</Link>
       </h1>
+      <h1 onClick={props.logout} className= 'logout'>
+        <Link to = '/'>Logout</Link>
+      </h1>
     </div>
   );
 }

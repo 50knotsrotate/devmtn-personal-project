@@ -14,24 +14,26 @@
     color: white;
 }
 
+.sign-up-form {
+
+    width: 60vw;
+    max-width: 800px;
+}
+
 .form {
-    height: 400px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
       text-align: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     background: rgba(0,0,0, .9);
     border-radius: 5px;
     padding: 10px;
 }
 
-.sign-up-form {
-
-text-align: center;
-}
 .sign-up-form h1 {
   font-size: 4em;
   color: white;
@@ -46,8 +48,8 @@ text-align: center;
 }
 
 .input-field {
-    width: 100%;
-    min-width: 100px;
+    width: 40vw;
+    min-width: 175px;
     height: 40px;
     background: rgba(255,255,255,.1);
     font-size: 2em;
@@ -59,7 +61,7 @@ text-align: center;
 
 .sign-up-button {
     width: 100%;
-    /* border: 10px solie white; */
+    border: 10px solid white;
     background-color:rgba(0, 230, 64, 1);
     text-decoration: none;
     font-size: 2em;

@@ -5,6 +5,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: SPACE-around;
+    /* border: 3px solid blue; */
 }
 
 h1 {
@@ -16,14 +17,14 @@ h1 {
 
 .wrapper {
     width: 100vw;
-    height: 92.3vh;
+    min-height: 92.3vh;
      background:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
  url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3549919.jpg');
     background-position: center;
     background-size: cover;
 }
 .notification {
-    width: 80%;
+    width: 90%;
     border: 3px solid whitesmoke;
     border-radius: 10px;
     margin: 10px auto;
@@ -50,6 +51,11 @@ h1 {
 .pro-signup {
     color: blue;
     text-decoration: underline;
+}
+
+.your-comments {
+    /* border: 10px solid yellow; */
+    width: 80%;
 }
 
 @keyframes pronotification {
@@ -80,6 +86,12 @@ h1 {
     .notifications {
         flex-direction: column;
         align-items: center;
+        /* border: 9px solid red; */
+    }
+
+    .notification {
+        width: 100%;
+        /* font-size: .5em; */
     }
 
     .your-comments {

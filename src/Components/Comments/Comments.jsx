@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Stars from '../Stars/Stars';
 import beer from '../../assets/review.png'
-import '../Brewery/BreweryPage.css'
+ import '../Brewery/BreweryPage.css'
+import './Comments.css' //you need to combine these into one css file
 
 export default function Comments(props) { 
   return (
       <div>
       {props.comments.map(review => { 
         return (
-          <div style={{width: '500px'}}className="reviews">
+          <div className="comment-container">
             <div className="comment-top">
               <div>
                 <h4>{review.username}</h4>
