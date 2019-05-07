@@ -34,26 +34,24 @@ class Notifications extends Component {
   componentWillUnmount() {
     Axios.put("/notifications")
       .then(res => {
-        //This takes all notifications that belong to the user which are NEW(unread), and puts them into OLD.
-        //This way, notifications only show up in NEW when they have not been seen yet.
-        // See server / controllers / notificationsController
-        //This functionality is in the process of being taken away
+        // TODO: just do this is component will mount.
       })
       .catch(err => {
         alert(err.request.response);
       });
   }
 
-  delete = id => { 
+  delete = id => {
     Axios.delete(`/comments/${id}`)
-      .then(response => { 
+      .then(response => {
         this.setState({
           myComments: response.data
-        })
-      }).catch(err => { 
-        alert(err.request.reponse)
+        });
       })
-  }
+      .catch(err => {
+        alert(err.request.reponse);
+      });
+  };
 
   getNewNotifications = () => {
     this.setState({
@@ -61,7 +59,6 @@ class Notifications extends Component {
     });
   };
   render() {
-
     return (
       <div className="wrapper">
         <div className="notifications">
