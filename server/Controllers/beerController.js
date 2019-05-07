@@ -11,11 +11,10 @@ module.exports = {
         }&radius=30`
       )
         .then(response => {
-          console.log(response)
         res.status(200).send(response.data);
       })
       .catch(err => {
-        console.log(err);
+        res.sendStatus(500)
       });
   },
 
@@ -31,7 +30,7 @@ module.exports = {
         res.status(200).send(response.data);
       })
       .catch(err => {
-        console.log(err);
+        res.sendStatus(500)
       });
   }
 };

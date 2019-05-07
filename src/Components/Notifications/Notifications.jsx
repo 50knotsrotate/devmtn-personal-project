@@ -44,11 +44,16 @@ class Notifications extends Component {
       });
   }
 
-  // toggleModal = () => {
-  //   this.setState({
-  //     showModal: !this.state.showModal
-  //   });
-  // };
+  delete = id => { 
+    Axios.delete(`/comments/${id}`)
+      .then(response => { 
+        this.setState({
+          myComments: response.data
+        })
+      }).catch(err => { 
+        alert(err.request.reponse)
+      })
+  }
 
   getNewNotifications = () => {
     this.setState({
@@ -56,7 +61,7 @@ class Notifications extends Component {
     });
   };
   render() {
-    // const { REACT_APP_STRIPE_KEY }= process.env
+
     return (
       <div className="wrapper">
         <div className="notifications">
@@ -76,7 +81,7 @@ class Notifications extends Component {
           </div>
           <div className="your-comments">
             <h1>YOUR COMMENTS</h1>
-            <Comments comments={this.state.myComments} />
+            <Comments comments={this.state.myComments} delete={this.delete} />
           </div>
         </div>
       </div>
