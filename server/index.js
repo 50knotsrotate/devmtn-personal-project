@@ -80,6 +80,7 @@ app.put("/user", authController.updateToPremium);
 app.get("/session", authController.getSession);
 
 app.post('/brewtest', (req, res) => {
+  console.log(req.body)
   const { id } = req.body
   axios.get(`https://api.brewerydb.com/v2/brewery/${id}/locations&?key=${API_KEY}`)
     .then(response => { 
@@ -112,16 +113,10 @@ app.get("/store", storeController.getStore);
 //For Stripe payments
 app.post("/charge", authController.purchasePremium);
 
-const root = require("path").join(__dirname, 'client', 'build')
-app.use(express.static(root));
+app.get('/', beerController.breweryLocation)
 
-app.get("*", (req, res) => {
-
-  res.sendFile('index.html', {root });
-});
-
-app.listen(4000, () => { console.log(`Listening on ${PORT}`) });
+app.listen(PORT, () => { console.log(`Listening on ${PORT}`) });
 
 module.exports.client = client;
 module.exports.API_KEY = API_KEY;
-module.exports.stripe = stripe
+module.exports.stripe = stripe;
