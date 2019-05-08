@@ -113,8 +113,6 @@ app.get("/store", storeController.getStore);
 //For Stripe payments
 app.post("/charge", authController.purchasePremium);
 
-app.get('/', beerController.breweryLocation)
-
 app.listen(PORT, () => { console.log(`Listening on ${PORT}`) });
 
 module.exports.client = client;
