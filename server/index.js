@@ -49,11 +49,9 @@ const client = require("twilio")(TWILIO_SID, TWILIO_AUTH_TOKEN);
 const brewDB = require('brewerydb-node');
 const brewdb = new brewDB(API_KEY);
 const axios = require('axios');
-const path = require('path')
 
 //Top level middleware
 app.use(express.json())
-app.use(express.static(`${__dirname}/../build`));
 app.use(
   session({
     secret: SESSION_SECRET,
@@ -114,11 +112,15 @@ app.get("/store", storeController.getStore);
 //For Stripe payments
 app.post("/charge", authController.purchasePremium);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
+const root = require("path").join(__dirname, 'client', 'build')
+app.use(express.static(root));
+
+app.get("*", (req, res) => {
+
+  res.sendFile('index.html', {root });
 });
 
-app.listen(PORT || 4000, () => { console.log(`Listening on ${PORT}`) });
+app.listen(4000, () => { console.log(`Listening on ${PORT}`) });
 
 module.exports.client = client;
 module.exports.API_KEY = API_KEY;
