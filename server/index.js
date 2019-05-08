@@ -114,7 +114,7 @@ app.get("/store", storeController.getStore);
 //For Stripe payments
 app.post("/charge", authController.purchasePremium);
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
