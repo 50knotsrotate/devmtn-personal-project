@@ -22,7 +22,7 @@ export default class Breweries extends Component {
       });
 
       axios
-        .post("/test", { latitude, longitude })
+        .post("http://localhost:4940/test", { latitude, longitude })
         .then(res => {
           this.setState({
             breweries: [
