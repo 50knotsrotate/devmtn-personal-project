@@ -60,6 +60,7 @@ app.use(
     cookie: { maxAge: 100000000 }
   })
 );
+app.use(express.static(`${__dirname}/../build`));
 
 //Connection to SQL database
 massive(CONNECTION_STRING)
@@ -118,3 +119,8 @@ app.listen(PORT, () => { console.log(`Listening on ${PORT}`) });
 module.exports.client = client;
 module.exports.API_KEY = API_KEY;
 module.exports.stripe = stripe;
+
+const path = require("path");
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
