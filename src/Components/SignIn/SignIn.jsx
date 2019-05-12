@@ -70,7 +70,7 @@ class SignIn extends Component {
             <button onClick={this.signIn} className = 'sign-up-button'>
               SIGN IN
             </button>
-            <Link to="">
+            <Link to="/signUp">
               <h3 style={{color:'white', textDecoration: 'underline'}}>Need to make an account?</h3>
             </Link>
           </div>
