@@ -31,6 +31,7 @@ export default class Brewery extends Component {
         );
       } else {
         axios.get(`comments/${this.props.match.params.id}`).then(result => {
+          console.log(dataFromLink)
           this.setState({
             data: [...res.data.data, dataFromLink],
             reviews: result.data
@@ -171,7 +172,7 @@ export default class Brewery extends Component {
             <div className="header">
               <h1>{this.state.data[this.state.data.length - 1].name}</h1>
               <h1>{this.state.data[this.state.data.length - 1].address}</h1>
-              <h1 style={{ fontSize: "50px" }}>Beer Menu</h1>
+              <h1 style={{ fontSize: "50px" }}>Beer!!</h1>
             </div>
           )}
 

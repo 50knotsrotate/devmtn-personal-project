@@ -47,8 +47,8 @@ values(1,'WicydY', 'this plase rools', 5, 1),
 (1,'WicydY', 'this plase rox my six', 4, 1),
 (1,'WicydY', 'this plase is dowpe', 4, 1),
 (1,'WicydY', 'Amazing. 5/5 is not enough for this place. I would give it a 10/10 , heck even a 100/100 if I could', 4, 1),
-(1,'WicydY', 'their beer is litereally just seltzer with food coloring... 3 stars.', 3, 1),
-(1,'WicydY', 'Amazing staff, GREAT beer, amazing time. Street parking wasnt that great though, 1 star.', 1, 1);
+(1,'WicydY', 'their beer is litereally just seltzer with food coloring... 4 stars.', 3, 1),
+(1,'WicydY', 'Amazing staff, GREAT beer, amazing time. Street parking wasnt that great though, 2 stars.', 1, 1);
 
 insert into store (name, description, price, image, handler)
 values('Suddenly: Chuck', 'Blow up your friends (or foes) phones with Chuck Norris jokes. Issues 5 jokes.', 10, 'https:

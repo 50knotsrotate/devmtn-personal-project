@@ -76,7 +76,7 @@ class SignUp extends Component {
       <div className="sign-up">
         <div className="sign-up-form">
           <div className="form">
-            <h2>Sign Up for Belche</h2>
+            <h2>Sign Up for Belch</h2>
             <p>Note: The api is incomplete and will not fetch data for some breweries</p>
             <div>
               <h2>Username</h2>
