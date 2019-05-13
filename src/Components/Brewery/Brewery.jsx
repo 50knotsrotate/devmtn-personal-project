@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Axios from '../../HOC/Axios'
 import queryString from "query-string";
 import "./BreweryPage.css";
 import Modal from "../Modal/Modal";
@@ -8,7 +9,7 @@ import CommentModal from "../commentModal/commentModal";
 import LoadingModal from "../LoadingModal/LoadingModal";
 import beer from '../../assets/review.png'
 
-export default class Brewery extends Component {
+class Brewery extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,19 +26,12 @@ export default class Brewery extends Component {
   componentDidMount() {
     const dataFromLink = queryString.parse(this.props.location.search);
     axios.get(`/breweryInfo?id=${this.props.match.params.id}`).then(res => {
-      if (res.data.length < 3) {
-        alert(
-          "This API decided it does not want to give me data. Sorry folks."
-        );
-      } else {
         axios.get(`comments/${this.props.match.params.id}`).then(result => {
-          console.log(dataFromLink)
           this.setState({
             data: [...res.data.data, dataFromLink],
             reviews: result.data
           });
         });
-      }
     });
   }
 
@@ -203,3 +197,5 @@ export default class Brewery extends Component {
     );
   }
 }
+
+export default Brewery

@@ -14,7 +14,8 @@ export function NavBar(props) {
       <div className="nav-items">
         <Link to = '/home'>Home</Link>
         <Link to='/notifications'><li>My activity</li></Link> 
-        <Link to = '/profile'> <li>Profile</li> </Link>
+        {/* <Link to = '/profile'> <li>Profile</li> </Link> */}
+        <Link to = '/store'> <li>Store</li> </Link>
         <Link to='/'><button className='logout' onClick={props.destroySession}>Logout</button></Link>
       </div>
       <img src={hamburgerIcon} className='hamburger-icon' alt='nav dropdown menu' onClick={props.toggleModal} />

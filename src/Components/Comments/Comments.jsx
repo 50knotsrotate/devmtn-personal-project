@@ -16,7 +16,7 @@ export default function Comments(props) {
                 <Stars rating={review.rating}/>
               </div>
               <div className="upvote">
-                <button className = 'delete-comment' onClick={() => props.delete(review.id)}>X</button>
+                {/* <button className = 'delete-comment' onClick={() => props.delete(review.id)}>X</button> will add this back in later */}
                 <img
                   src={beer}
                   style={{ width: "20px", height: "20px" }}

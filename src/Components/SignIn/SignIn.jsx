@@ -21,10 +21,10 @@ class SignIn extends Component {
       .post("/signin", {username, password})
       .then(user => {
         this.props.createSession(user.data);
-        // this.props.goBack()
+        this.props.history.push('/home');
       })
       .catch(err => {
-        this.props.history.goBack()
+        // this.props.history.goBack()
         return alert(err.request.response);
       });
   };
@@ -68,7 +68,7 @@ class SignIn extends Component {
               />
             </div>
             <button onClick={this.signIn} className = 'sign-up-button'>
-              <Link to="/home">Sign In</Link>
+              SIGN IN
             </button>
             <Link to="/signUp">
               <h3 style={{color:'white', textDecoration: 'underline'}}>Need to make an account?</h3>

@@ -24,10 +24,10 @@ class SignUp extends Component {
       .post("/signup", { username, password, textNotifications, number })
       .then(user => {
         this.props.createSession(user.data); //inserts new user into DB, creates a session, and uses session for props
+        this.props.history.push('/home');
         
       })
       .catch(err => {
-        this.props.history.goBack(); 
         this.errorHandler(err);
       });
   };
@@ -77,7 +77,6 @@ class SignUp extends Component {
         <div className="sign-up-form">
           <div className="form">
             <h2>Sign Up for Belch</h2>
-            <p>Note: The api is incomplete and will not fetch data for some breweries</p>
             <div>
               <h2>Username</h2>
               <input
@@ -119,7 +118,7 @@ class SignUp extends Component {
                   )
                 }
               >
-              <Link to="/home"><span>Sign Up</span></Link>
+              <span>Sign Up</span>
               </button>
             <Link to="/">
               <h3 style={{color:'white', textDecoration: 'underline'}} >Already have an account?</h3>
