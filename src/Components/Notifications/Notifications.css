@@ -18,12 +18,13 @@ h1 {
 .wrapper {
     /* width: 100vw; */
     width: 100%;
-    min-height: 92.3vh;
+    min-height: calc(100vh - 73px);
      background:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
  url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3549919.jpg');
     background-position: center;
     background-size: cover;
     /* border: 3px solid green; */
+     overflow-y: hidden;
 }
 .notification {
     width: 90%;
@@ -91,6 +92,10 @@ h1 {
         flex-direction: column;
         align-items: center;
         /* border: 9px solid red; */
+    }
+
+    .wrapper {
+        min-height: calc(100vh - 60px);
     }
 
     .notification {

@@ -1,5 +1,7 @@
 .nav-bar {
     width: 100%;
+    /* position: fixed; */
+    top: 0;
     box-sizing: border-box;
     display: flex;
     align-items: center;

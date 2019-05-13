@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import Axios from "axios";
-// import { Elements, StripeProvider } from "react-stripe-elements";
+import axios from "axios";
+import Axios from '../../HOC/Axios';
 import { getSession } from "../../ducks/sessionReducer";
 import { connect } from "react-redux";
-// import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import Comments from "../Comments/Comments";
 import "./Notifications.css";
 
@@ -11,28 +10,13 @@ class Notifications extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notifications: null,
-      myComments: [],
-      showModal: false
+      showModal: false,
+      comments: null
     };
-  }
-  componentWillMount() {
-    Axios.get("/notifications").then(res => {
-      Axios.get("/session").then(session => {
-        this.props.getSession(session.data);
-        Axios.get(`/user/comments`).then(comments => {
-          this.setState({
-            notifications: res.data.filter(notif => notif.is_new),
-            myComments: comments.data
-            //need to make it so new comments are filtered out in willMount, not in unMount.
-          });
-        });
-      });
-    });
   }
 
   componentWillUnmount() {
-    Axios.put("/notifications")
+    axios.put("/notifications")
       .then(res => {
         // TODO: just do this is component will mount.
       })
@@ -42,10 +26,10 @@ class Notifications extends Component {
   }
 
   delete = id => {
-    Axios.delete(`/comments/${id}`)
+    axios.delete(`/comments/${id}`)
       .then(response => {
         this.setState({
-          myComments: response.data
+          comments: response.data
         });
       })
       .catch(err => {
@@ -64,8 +48,8 @@ class Notifications extends Component {
         <div className="notifications">
           <div className="notifs-container">
             <h1>NOTIFICATIONS</h1>
-            {this.state.notifications && this.state.notifications.length ? (
-              this.state.notifications.map((notif, i) => {
+            {this.props.data[0] && this.props.data[0].length ? (
+              this.props.data[0].map((notif, i) => {
                 return (
                   <div className="notification" key={i}>
                     <h2>{notif.content}</h2>
@@ -78,7 +62,7 @@ class Notifications extends Component {
           </div>
           <div className="your-comments">
             <h1>YOUR COMMENTS</h1>
-            <Comments comments={this.state.myComments} delete={this.delete} />
+            <Comments comments={this.props.data[2] && this.props.data[2].length ? this.props.data[2] : []} delete={this.delete} />
           </div>
         </div>
       </div>
@@ -99,4 +83,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Notifications);
+)(Axios(Notifications, ["/notifications", "/session", "/user/comments"]));
