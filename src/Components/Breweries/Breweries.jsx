@@ -15,6 +15,7 @@ export default class Breweries extends Component {
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(position => {
+        alert('the nav is working');
       const { latitude, longitude } = position.coords;
 
       this.setState({

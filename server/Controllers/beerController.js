@@ -6,7 +6,7 @@ module.exports = {
     const { latitude, longitude } = req.body;
     axios
       .get(
-        `https://api.brewerydb.com/v2/search/geo/point?lat=${latitude}&lng=${longitude}&key=${
+        `http://api.brewerydb.com/v2/search/geo/point?lat=${latitude}&lng=${longitude}&key=${
           key.API_KEY
         }&radius=30`
       )
@@ -22,7 +22,7 @@ module.exports = {
     const { id } = req.query;
     axios
       .get(
-        `https://api.brewerydb.com/v2/brewery/${id}/beers?key=${
+        `http://api.brewerydb.com/v2/brewery/${id}/beers?key=${
           key.API_KEY
         }&withBreweries=Y&withSocialAccounts=Y&withIngredients=Y`
       )
