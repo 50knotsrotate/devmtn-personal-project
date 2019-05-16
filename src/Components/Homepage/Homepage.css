@@ -1,0 +1,18 @@
+.homepages{
+    color: black;
+    width: 100vw;
+    height: calc(100vh - 73px);
+    background-color: red;
+}
+
+.homepages h1 {
+    color: black;
+}
+
+.homepage-breweries {
+    border: 5px solid green;
+    width: 100vw;
+    height: 30vh;
+    overflow-y: scroll;
+    
+}

@@ -60,7 +60,7 @@ app.use(
     cookie: { maxAge: 100000000 }
   })
 );
-app.use(express.static(`${__dirname}/../build`));
+//app.use(express.static(`${__dirname}/../build`)); uncomment for production
 
 //Connection to SQL database
 massive(CONNECTION_STRING)
@@ -76,6 +76,8 @@ app.post("/signup", ...signUpMiddleware);
 app.post("/signin", authController.sign_in);
 app.delete("/logout", authController.logout);
 app.put("/user", authController.updateToPremium);
+
+app.get('user/:id', usersController)
 
 //Used exclusively by redux for keeping up with changes on the backend.
 app.get("/session", authController.getSession);
@@ -120,7 +122,7 @@ module.exports.client = client;
 module.exports.API_KEY = API_KEY;
 module.exports.stripe = stripe;
 
-const path = require("path");
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
+// const path = require("path");
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../build/index.html"));
+// }); uncomment for production

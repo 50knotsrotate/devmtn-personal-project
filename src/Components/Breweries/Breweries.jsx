@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import BreweryTitle from "../BreweryTitle/BreweryTitle";
 import axios from "axios";
 import LoadingModal from '../LoadingModal/LoadingModal'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
 
 
 //Could I maybe do this in App and pass the data in?
