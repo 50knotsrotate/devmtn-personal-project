@@ -8,7 +8,9 @@ module.exports = {
         from: "+12183668652",
       to: `+1${req.body.number}`
     }).then(message => {
-        console.log('message sent')
+      
+    }).catch(err => { 
+      console.log(err)
     })
   },
 
