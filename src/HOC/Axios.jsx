@@ -22,12 +22,7 @@ export default function Axios(WrappedComponent, urls) {
     }
 
     render() {
-        return (
-            <span>
-                {console.log(this.state.data)}
-            <WrappedComponent {...this.props} data={this.state.data} />
-          </span>
-        );
+        return <WrappedComponent {...this.props} data={this.state.data} />
     }
   };
 }

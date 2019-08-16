@@ -20,9 +20,8 @@ export default class Marker extends Component {
   render() {
     return (
         <div onClick={this.toggleModal}>
-            {/* {console.log(this.props)} */}
             {this.state.showModal ? (
-                <Modal  /*backHome = { this.props.backHome } */ type='map' name={this.props.name} address={this.props.address} id={this.props.id} distance={this.props.distance} />
+                <Modal type='map' name={this.props.name} address={this.props.address} id={this.props.id} distance={this.props.distance} />
             ): (
                  <img
           style={{ width: "40px", height: "40px" }}
