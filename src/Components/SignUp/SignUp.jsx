@@ -76,18 +76,19 @@ class SignUp extends Component {
       <div className="sign-up">
         <div className="sign-up-form">
           <div className="form">
-            <h2>Sign Up for Belch</h2>
+            <h2 className="title" >Sign Up for Belch</h2>
             <div>
-              <h2>Username</h2>
+              {/* <h3>Username</h3> */}
               <input
                 type="text"
+                placeholder="Username"
                 value={this.state.username}
                 onChange={e => this.handleUsernameInput(e.target.value)}
                 className="input-field"
               />
             </div>
             <div>
-              <h2>Password</h2>
+              {/* <h3>Password</h3> */}
               <input
                 type="password"
                 onChange={e => this.handlePasswordInput(e.target.value)}
@@ -96,17 +97,19 @@ class SignUp extends Component {
                 className="input-field"
               />
             </div>
+            <div className="text-notifications">
             <h4>I would like to recive text notifications</h4>
-            <input type="checkbox" onChange={e => this.toggleText(e)} />
+            <input className="checkbox" type="checkbox" onChange={e => this.toggleText(e)} />
             {this.state.textNotifications && (
               <input
                 type="text"
                 className="text-number"
-                placeholder="No spaces of dashes. Dont worry, we encrypt these."
+                placeholder="Please enter phone number. No spaces or dashes."
                 onChange={e => this.onNumber(e.target.value)}
                 value={this.state.number}
               />
             )}
+            </div>
               <button
                 className="sign-up-button"
                 onClick={() =>
@@ -121,7 +124,7 @@ class SignUp extends Component {
               <span>Sign Up</span>
               </button>
             <Link to="/">
-              <h3 style={{color:'white', textDecoration: 'underline'}} >Already have an account?</h3>
+              <h4 style={{color:'#FEFF33', textDecoration: 'underline'}} >Already have an account?</h4>
             </Link>
           </div>
         </div>

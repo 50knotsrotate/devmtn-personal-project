@@ -46,9 +46,9 @@ class SignIn extends Component {
       <div className="sign-up">
         <div className="sign-up-form">
           <div className="form">
-          <h2>Sign into Belch</h2>
+          <h2 className="title">Welcome to Belch</h2>
             <div>
-              <h2>Username</h2>
+              {/* <h3>Username</h3> */}
               <input
                 type="text"
                 placeholder="Username"
@@ -58,7 +58,7 @@ class SignIn extends Component {
               />
             </div>
             <div>
-              <h2>Password</h2>
+              {/* <h3>Password</h3> */}
               <input
                 type="password"
                 onChange={e => this.handlePasswordInput(e.target.value)}
@@ -68,10 +68,10 @@ class SignIn extends Component {
               />
             </div>
             <button onClick={this.signIn} className = 'sign-up-button'>
-              SIGN IN
+              Sign In
             </button>
             <Link to="/signUp">
-              <h3 style={{color:'white', textDecoration: 'underline'}}>Need to make an account?</h3>
+              <h4 style={{color:'#FEFF33', textDecoration: 'underline'}}>Need to make an account?</h4>
             </Link>
           </div>
         </div>
