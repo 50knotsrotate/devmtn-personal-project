@@ -21,18 +21,36 @@
 }
 
 .form {
-    min-height: 375px;
+    height: 405px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-      text-align: center;
+    text-align: center;
     width: 100%;
     margin: 0 auto;
     background: rgba(0,0,0, .9);
     border-radius: 5px;
-    padding: 10px;
+    box-sizing: content-box;
+    /* padding: 30px; */
 }
+
+.title {
+    background-color: rgba(128, 128, 128, 0.651);
+    height: 65px;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox {
+    height: 20px;
+    width: 20px;
+    margin-bottom: 8px;
+}
+
+
 
 .sign-up-form h1 {
   font-size: 4em;
@@ -40,15 +58,45 @@
   font-family: monospace;
 } 
 
+.form h2 {
+    font-size: 40px;
+    font-family: monospace;
+}
+
+.form h3 {
+    font-size: 30px;
+    font-family: monospace;
+}
+
+.form h4 {
+    font-size: 18px;
+    font-family: monospace;
+    padding-bottom: 15px;
+    color: greenyellow;
+    letter-spacing: -1px;
+}
+
+
 .text-number {
-    width: 90%;
+    width: 60%;
+    min-height: 30px;
     margin: 0 auto;
     margin-bottom: 10px;
     border-radius: 5px;
+    padding-left: 5px;
+}
+
+.text-notifications {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 5px;
 }
 
 .input-field {
-    width: 40vw;
+    /* width: 40vw; */
     min-width: 175px;
     height: 40px;
     background: rgba(255,255,255,.1);
@@ -56,11 +104,13 @@
     font-family: monospace;
     border-bottom: 1px solid white;
     color: white;
+    text-align: center;
   
 }
 
 .sign-up-button {
-    width: 100%;
+    width: 40%;
+    height: 40px;
     border: 10px solid white;
     background-color:rgba(0, 230, 64, 1);
     text-decoration: none;
