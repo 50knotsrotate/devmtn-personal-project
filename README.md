@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Note:I took down www.belchpoint.com because it was too expensive to keep running. Server, domain,  and API costs made it worthwhile for me to take the site down and instead write a walk through. 
 
-## Available Scripts
+#### Belch point was an individually developed location based brewery discovery and review site. It was one of my code bootcamp projects. Users could find breweries near their location using the BreweryDB API. After logging in, the user was presented with a list of all the breweries nearby, and presented with the following: 
 
-In the project directory, you can run:
+IMG HERE
 
-### `npm start`
+#### When one of the brewery links were clicked, the user was presented with all the beers the brewery sold, along with a nice animated top-to-middle modal which had a description of each beer. This is also where the user would be able to write a review, which looked like this: 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+img here
 
-### `npm test`
+### To give a review, the user would hover the mouse over the circles until the appropriate number of glasses shows up, and clicking would set the rating in place, no longer responding to hovers until it was clicked again. On mobile, it would only respond to clicks. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### Whenever a user submitted a comment, they would earn one "belch point", an online "currency" for this site, which can be used to purchase things in the store, which we will look at in a bit. One other way a user could earn "belch points" is by getting their comments "upvoted" by other users. Each comment would keep track of how many upvotes it has gotten, and the comments are listed in order of how many belch points it has earned. This is done through the magic of SQL queries.. Specifically this one:
+```sql
+select u.username, c.rating, c.content, c.upvotes, c.user_id, c.id
+from comments c
+    join users u on (u.id = c.user_id)
+where c.brewery_id = $1
+order by c.upvotes desc;
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### After a user either makes a comment, or one of their comments were upvoted, they could see this in the "notifications" tab, which would bring you to this page: 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+img here
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### The user does not have to manually delete notifications. They are deleted right after the user leaves the page, which was done with the help of the componentWillUnmount React lifecycle method. 
 
-### `npm run eject`
+#### If the user signed up for text notifications, a text would have been sent to the user telling them that their comment was upvoted, and by who. This was done with Twilio. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Finally, the user could take their "belch points" and buy things in the store, which had only one item. For 10 belch points, you could send 10 text messages at once, each one a different chuck norris joke, to any one phone number you wanted. This was also done with the help of Twilio & a chuck norris joke API. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
